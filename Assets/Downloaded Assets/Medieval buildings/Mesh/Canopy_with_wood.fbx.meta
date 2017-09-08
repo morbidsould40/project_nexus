@@ -1,0 +1,121 @@
+fileFormatVersion: 2
+guid: 9301262eec6666c47862b1510ec133d6
+timeCreated: 1494346213
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Axe
+    100002: //RootNode
+    100004: Canopy_with_wood
+    100006: Firewood_000
+    100008: Firewood_004
+    100010: Roof
+    100012: Firewood
+    100014: Firewood___axe
+    400000: Axe
+    400002: //RootNode
+    400004: Canopy_with_wood
+    400006: Firewood_000
+    400008: Firewood_004
+    400010: Roof
+    400012: Firewood
+    400014: Firewood___axe
+    2300000: Axe
+    2300002: Canopy_with_wood
+    2300004: Firewood_000
+    2300006: Firewood_004
+    2300008: Roof
+    2300010: Firewood
+    2300012: Firewood___axe
+    3300000: Axe
+    3300002: Canopy_with_wood
+    3300004: Firewood_000
+    3300006: Firewood_004
+    3300008: Roof
+    3300010: Firewood
+    3300012: Firewood___axe
+    4300000: Roof
+    4300002: Canopy_with_wood
+    4300004: Axe
+    4300006: Firewood_000
+    4300008: Firewood_004
+    4300010: Firewood___axe
+    4300012: Firewood
+    6400000: Axe
+    6400002: Canopy_with_wood
+    6400004: Firewood_000
+    6400006: Firewood_004
+    6400008: Roof
+    6400010: Firewood
+    6400012: Firewood___axe
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

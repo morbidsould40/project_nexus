@@ -1,0 +1,193 @@
+fileFormatVersion: 2
+guid: f3a3dc897105ac54cbde8cb15dabe9f5
+timeCreated: 1494325042
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: _Door_parent_001
+    100002: Door_001
+    100004: floor_1_001
+    100006: floor_1_002
+    100008: Furnace
+    100010: //RootNode
+    100012: Plane_001
+    100014: Plane_002
+    100016: Walls_003
+    100018: Walls_004
+    100020: Window_007
+    100022: Window_008
+    100024: Wooden_frame_003
+    100026: Window_000
+    100028: Door
+    100030: Door_Parent
+    100032: Floor_1
+    100034: Floor_2
+    100036: Window_1
+    100038: Window_2
+    400000: _Door_parent_001
+    400002: Door_001
+    400004: floor_1_001
+    400006: floor_1_002
+    400008: Furnace
+    400010: //RootNode
+    400012: Plane_001
+    400014: Plane_002
+    400016: Walls_003
+    400018: Walls_004
+    400020: Window_007
+    400022: Window_008
+    400024: Wooden_frame_003
+    400026: Window_000
+    400028: Door
+    400030: Door_Parent
+    400032: Floor_1
+    400034: Floor_2
+    400036: Window_1
+    400038: Window_2
+    2300000: _Door_parent_001
+    2300002: Door_001
+    2300004: floor_1_001
+    2300006: floor_1_002
+    2300008: Furnace
+    2300010: Plane_001
+    2300012: Plane_002
+    2300014: Walls_003
+    2300016: Walls_004
+    2300018: Window_007
+    2300020: Window_008
+    2300022: Wooden_frame_003
+    2300024: Window_000
+    2300026: Door
+    2300028: Door_Parent
+    2300030: Floor_1
+    2300032: Floor_2
+    2300034: Window_1
+    2300036: Window_2
+    3300000: _Door_parent_001
+    3300002: Door_001
+    3300004: floor_1_001
+    3300006: floor_1_002
+    3300008: Furnace
+    3300010: Plane_001
+    3300012: Plane_002
+    3300014: Walls_003
+    3300016: Walls_004
+    3300018: Window_007
+    3300020: Window_008
+    3300022: Wooden_frame_003
+    3300024: Window_000
+    3300026: Door
+    3300028: Door_Parent
+    3300030: Floor_1
+    3300032: Floor_2
+    3300034: Window_1
+    3300036: Window_2
+    4300000: Furnace
+    4300002: _Door_parent_001
+    4300004: Door_001
+    4300006: floor_1_002
+    4300008: Plane_002
+    4300010: Plane_001
+    4300012: Walls_004
+    4300014: floor_1_001
+    4300016: Window_008
+    4300018: Wooden_frame_003
+    4300020: Walls_003
+    4300022: Window_007
+    4300024: Window_000
+    4300026: Floor_2
+    4300028: Floor_1
+    4300030: Window_2
+    4300032: Window_1
+    4300034: Door_Parent
+    4300036: Door
+    6400000: _Door_parent_001
+    6400002: Door_001
+    6400004: floor_1_001
+    6400006: floor_1_002
+    6400008: Furnace
+    6400010: Plane_001
+    6400012: Plane_002
+    6400014: Walls_003
+    6400016: Walls_004
+    6400018: Window_007
+    6400020: Window_008
+    6400022: Wooden_frame_003
+    6400024: Window_000
+    6400026: Door
+    6400028: Door_Parent
+    6400030: Floor_1
+    6400032: Floor_2
+    6400034: Window_1
+    6400036: Window_2
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
