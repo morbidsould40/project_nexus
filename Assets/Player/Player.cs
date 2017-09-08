@@ -47,6 +47,7 @@ public class Player : MonoBehaviour, IDamageable {
         }
     }
 
+    // Damage interface
     public void TakeDamage(float damage)
     {
         currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
