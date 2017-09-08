@@ -33,19 +33,22 @@ public class Enemy : MonoBehaviour, IDamageable {
 
     private void Update()
     {
+        // Attack player if in attack range
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
         if (distanceToPlayer <= attackRadius && !isAttacking)
         {
             isAttacking = true;
             InvokeRepeating("SpawnProjectile", 0f, secondsBetweenShots); // TODO Switch to coroutines
         }
-        
+
+        // Stop attacking player if outside attack range
         if (distanceToPlayer > attackRadius)
         {
             isAttacking = false;
             CancelInvoke();
         }
 
+        // Chase player if within chase range
         if (distanceToPlayer <= chaseRadius)
         {
             aiCharacterControl.SetTarget(player.transform);
