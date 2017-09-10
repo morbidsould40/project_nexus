@@ -143,15 +143,14 @@
     <Compile Include="Assets\Enemies\Enemy.cs" />
     <Compile Include="Assets\Enemies\EnemyHealthBar.cs" />
     <Compile Include="Assets\Enemies\EnemyUI.cs" />
-    <Compile Include="Assets\Enemies\Projectile.cs" />
     <Compile Include="Assets\Knight\scripts\rotator.cs" />
-    <Compile Include="Assets\PinwheelFantasyEffectFreePack2\Scripts\Fireball.cs" />
-    <Compile Include="Assets\PinwheelFantasyEffectFreePack2\Scripts\Spawn.cs" />
     <Compile Include="Assets\Player\Player.cs" />
     <Compile Include="Assets\Player\PlayerHealthBar.cs" />
     <Compile Include="Assets\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Special Abilities\Fireball\Fireball.cs" />
     <Compile Include="Assets\Utility\IDamageable.cs" />
     <Compile Include="Assets\Utility\SpinMe.cs" />
+    <Compile Include="Assets\Weapons\Projectile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Downloaded Assets\L_FG_Assets_Pack_Lite\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
