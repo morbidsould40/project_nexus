@@ -30,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149790}
   m_LocalRotation: {x: -0, y: 0.97316056, z: -0, w: 0.23012707}
-  m_LocalPosition: {x: 0.5043793, y: -0.359, z: 0.22375488}
+  m_LocalPosition: {x: 0.5043793, y: -0.32, z: 0.22375488}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4460128457950404}
@@ -104,7 +104,7 @@ CapsuleCollider:
   m_Radius: 0.45
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.95, z: 0}
+  m_Center: {x: 0, y: 1.04, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -1082,6 +1082,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4338838800097040}
+  - component: {fileID: 114226696558639638}
   m_Layer: 0
   m_Name: R_point1
   m_TagString: Untagged
@@ -2593,6 +2594,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+--- !u!114 &114226696558639638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1781198640983036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ecae2f2adf0004fb07c938cdbf1bb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114385567965838538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2620,7 +2632,8 @@ MonoBehaviour:
   damagePerHit: 50
   minTimeBetweenHits: 1
   maxMeleeRange: 2
-  weaponInUse: {fileID: 11400000, guid: 15cd6a551f4d7454dbb15b9ae6883a55, type: 2}
+  weaponInUse: {fileID: 11400000, guid: 3735b36aef4293b4d89e4154e3743f78, type: 2}
+  weaponSocket: {fileID: 1781198640983036}
 --- !u!137 &137412010937458514
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
