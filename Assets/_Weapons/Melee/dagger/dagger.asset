@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 762dd1a5a4818c84294584dafc2c41fc, type: 3}
+  m_Name: dagger
+  m_EditorClassIdentifier: 
+  gripTransform: {fileID: 4296255832533410, guid: 6c2b9100d4ee6904f81148efeed0e3a7,
+    type: 2}
+  weaponPrefab: {fileID: 1927359733128288, guid: 2903f7447034d564e91b5742167d6466,
+    type: 2}
+  attackAnimation: {fileID: 7400000, guid: 668fdc4f7012b7943a1e3a891aedc143, type: 3}
