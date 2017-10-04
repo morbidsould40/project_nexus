@@ -12,6 +12,27 @@ namespace RPG.Weapons
 
         [SerializeField] GameObject weaponPrefab;
         [SerializeField] AnimationClip attackAnimation;
+        [SerializeField] AnimationClip idleAnimation;
+        [SerializeField] AnimationClip runAnimation;
+        [SerializeField] float damagePerHit = 2f;
+        [SerializeField] float minTimeBetweenHits = 1f;
+        [SerializeField] float maxMeleeRange = 2f;
+
+        public float GetMinTimeBetweenHits()
+        {
+            // TODO consider whether we take animation time into account
+            return minTimeBetweenHits;
+        }
+
+        public float GetAttackRange()
+        {
+            return maxMeleeRange;
+        }
+
+        public float GetDamagePerHit()
+        {
+            return damagePerHit;
+        }
 
         public GameObject GetWeaponPrefab()
         {
@@ -23,6 +44,19 @@ namespace RPG.Weapons
             RemoveAnimationEvents();
             return attackAnimation;
         }
+
+        public AnimationClip GetIdleAnimClip()
+        {
+            RemoveAnimationEvents();
+            return idleAnimation;
+        }
+
+        public AnimationClip GetRunAnimClip()
+        {
+            RemoveAnimationEvents();
+            return runAnimation;
+        }
+            
 
         // Remove animation events so that asset packs cannot cause crashes
         private void RemoveAnimationEvents()

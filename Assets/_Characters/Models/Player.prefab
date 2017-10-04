@@ -2629,9 +2629,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLayer: 9
   maxHealthPoints: 1000
-  damagePerHit: 50
-  minTimeBetweenHits: 1
-  maxMeleeRange: 2
   weaponInUse: {fileID: 11400000, guid: 15cd6a551f4d7454dbb15b9ae6883a55, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: f9c9c643f9fd2ce43be7e20101c61c2a,
     type: 2}

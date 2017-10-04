@@ -15,4 +15,9 @@ MonoBehaviour:
     type: 2}
   weaponPrefab: {fileID: 1927359733128288, guid: 2903f7447034d564e91b5742167d6466,
     type: 2}
-  attackAnimation: {fileID: 7400000, guid: 668fdc4f7012b7943a1e3a891aedc143, type: 3}
+  attackAnimation: {fileID: 7400000, guid: 32dbe676b3c566c4a9836c244bb478dd, type: 3}
+  idleAnimation: {fileID: 7400000, guid: 5c0b1be3522a16f4c8519b02a90a980d, type: 3}
+  runAnimation: {fileID: 7400000, guid: 347deb13f172b5b418bf8b5c60941b68, type: 3}
+  damagePerHit: 12
+  minTimeBetweenHits: 0.5
+  maxMeleeRange: 1
