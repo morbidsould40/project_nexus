@@ -29,8 +29,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149790}
-  m_LocalRotation: {x: -0, y: 0.97316056, z: -0, w: 0.23012707}
-  m_LocalPosition: {x: 0.5043793, y: -0.32, z: 0.22375488}
+  m_LocalRotation: {x: -0, y: 0.20964353, z: -0, w: 0.97777796}
+  m_LocalPosition: {x: 21.72, y: 0, z: 17.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4460128457950404}
@@ -50,7 +50,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.01
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_JumpPower: 6
   m_GravityMultiplier: 2
   m_RunCycleLegOffset: 0.3
-  m_MoveSpeedMultiplier: 0.8
+  m_MoveSpeedMultiplier: 0.7
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 1
 --- !u!136 &13615390
@@ -98,7 +98,7 @@ CapsuleCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149790}
-  m_Material: {fileID: 13400000, guid: 52baaeb214519f347a35cf0edfd262ff, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.45
