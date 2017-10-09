@@ -20,7 +20,7 @@ namespace RPG.Characters
         Animator animator;
         float currentHealthPoints;
         CameraRaycaster cameraRaycaster;
-        float lastHitTime = 0f;
+        float lastHitTime = 0f;        
 
         public float healthAsPercentage
         {
@@ -64,15 +64,31 @@ namespace RPG.Characters
             weapon.transform.localRotation = weaponInUse.gripTransform.localRotation;
         }
 
-        private GameObject RequestDominantHand()
+        /*private GameObject RequestDominantHand()
         {
             var dominantHands = GetComponentsInChildren<DominantHand>();
             int numberOfDominantHands = dominantHands.Length;
             Assert.IsFalse(numberOfDominantHands <= 0, "No dominant hand found on player. Please add one.");
             Assert.IsFalse(numberOfDominantHands > 1, "Multiple dominant hand scripts on player. Please remove one.");
             return dominantHands[0].gameObject;
-        }
+        }*/
 
+        private GameObject RequestDominantHand()
+        {
+            var handed = weaponInUse.GetDominantGrip();
+            if (handed == Weapon.DominantGripHand.RightHand)
+            {
+                var dominantHands = GetComponentsInChildren<DominantHandRight>();
+                return dominantHands[0].gameObject;
+            }
+            if (handed == Weapon.DominantGripHand.LeftHand)
+            {
+                var dominantHands = GetComponentsInChildren<DominantHandLeft>();
+                return dominantHands[0].gameObject;
+            }
+            return null;
+        }
+        
         private void RegisterForMouseClick()
         {
             cameraRaycaster = FindObjectOfType<CameraRaycaster>();

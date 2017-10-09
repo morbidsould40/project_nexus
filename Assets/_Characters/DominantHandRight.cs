@@ -2,7 +2,7 @@
 
 namespace RPG.Characters
 {
-    public class DominantHand : MonoBehaviour
+    public class DominantHandRight : MonoBehaviour
     {
 
         // Add to dominant hand on character prefab

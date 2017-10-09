@@ -1,14 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RPG.Weapons
 {
     [CreateAssetMenu(menuName = ("RPG/Weapon"))]
     public class Weapon : ScriptableObject
     {
-
         public Transform gripTransform;
+
+        public enum WeaponHands
+        {
+            OneHanded,
+            TwoHanded
+        }
+
+        public enum DominantGripHand
+        {
+            RightHand,
+            LeftHand
+        }
 
         [SerializeField] GameObject weaponPrefab;
         [SerializeField] AnimationClip attackAnimation;
@@ -17,6 +26,8 @@ namespace RPG.Weapons
         [SerializeField] float damagePerHit = 2f;
         [SerializeField] float minTimeBetweenHits = 1f;
         [SerializeField] float maxMeleeRange = 2f;
+        [SerializeField] WeaponHands weaponHands;
+        [SerializeField] DominantGripHand dominantGripHand;        
 
         public float GetMinTimeBetweenHits()
         {
@@ -56,12 +67,23 @@ namespace RPG.Weapons
             RemoveAnimationEvents();
             return runAnimation;
         }
-            
+        
+        public WeaponHands GetWeaponHand()
+        {
+            return weaponHands;
+        }
+
+        public DominantGripHand GetDominantGrip()
+        {
+            return dominantGripHand;
+        }
 
         // Remove animation events so that asset packs cannot cause crashes
         private void RemoveAnimationEvents()
         {
             attackAnimation.events = new AnimationEvent[0];
+            idleAnimation.events = new AnimationEvent[0];
+            runAnimation.events = new AnimationEvent[0];
         }
     }
 }

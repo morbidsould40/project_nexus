@@ -21,3 +21,5 @@ MonoBehaviour:
   damagePerHit: 40
   minTimeBetweenHits: 1.5
   maxMeleeRange: 1.75
+  weaponHands: 0
+  dominantGripHand: 0
