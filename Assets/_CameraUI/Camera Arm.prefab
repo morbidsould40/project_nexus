@@ -40,8 +40,8 @@ GameObject:
   - component: {fileID: 124445141638748974}
   - component: {fileID: 81158524744670502}
   - component: {fileID: 114797372889231354}
-  - component: {fileID: 114547525146374226}
   - component: {fileID: 114183862120573476}
+  - component: {fileID: 114411258919753554}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -55,8 +55,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1774299530756216}
-  m_LocalRotation: {x: -0.09631564, y: 0.20862354, z: -0.02065081, w: 0.9730227}
-  m_LocalPosition: {x: 2.03, y: 3.2, z: -1.8}
+  m_LocalRotation: {x: -0, y: 0.20964353, z: -0, w: 0.97777796}
+  m_LocalPosition: {x: 1.8577335, y: 0, z: 0.1496054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4791273990889364}
@@ -149,10 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f38397a5b56d9b44b4c13df92053e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameCanvasPrefab: {fileID: 0}
   eventSystemPrefab: {fileID: 1116718231373164, guid: 4a0d4aa32e92f614384c6e7582608f09,
     type: 2}
---- !u!114 &114547525146374226
+--- !u!114 &114411258919753554
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -160,13 +159,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1825504736335106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f83d710eebbbca438a7ce04015996df, type: 3}
+  m_Script: {fileID: 11500000, guid: b5f38ecdb2bf0ce4088629c909c4736a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkCursor: {fileID: 2800000, guid: 5232dff125d2a477abda5091702a1a15, type: 3}
-  unknownCursor: {fileID: 2800000, guid: f583eee83e4fa44ca9ae7aad88224fc5, type: 3}
-  targetCursor: {fileID: 2800000, guid: 9b582cc5a05de4a6b828c8e72df8fc39, type: 3}
-  cursorHotspot: {x: 0, y: 0}
+  energyBar: {fileID: 0}
+  maxEnergyPoints: 100
+  pointsPerHit: 10
+  currentEnergyPoints: 100
 --- !u!114 &114797372889231354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,7 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02853f5d34bd8f429969ac34c466d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerPriorities: 090000000a00000008000000
+  walkCursor: {fileID: 2800000, guid: 5232dff125d2a477abda5091702a1a15, type: 3}
+  enemyCursor: {fileID: 2800000, guid: 9b582cc5a05de4a6b828c8e72df8fc39, type: 3}
+  cursorHotspot: {x: 0, y: 0}
 --- !u!124 &124445141638748974
 Behaviour:
   m_ObjectHideFlags: 1

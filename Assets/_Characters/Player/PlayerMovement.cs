@@ -17,17 +17,13 @@ namespace RPG.Characters
         AICharacterControl aiCharacterControl = null;
         GameObject walkTarget = null;
 
-        // TODO find way to solve fight between serialize and const
-        [SerializeField] const int walkableLayerNumber = 8;
-        [SerializeField] const int enemyLayerNumber = 9;
-
         void Start()
         {
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
             thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
             aiCharacterControl = GetComponent<AICharacterControl>();
-            cameraRaycaster.notifyMouseClickObservers += ProcessMouseClick;
             cameraRaycaster.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
             walkTarget = new GameObject("walkTarget");
         }
 
@@ -40,21 +36,13 @@ namespace RPG.Characters
             }
         }
 
-        void ProcessMouseClick(RaycastHit raycastHit, int layerHit)
+        void OnMouseOverEnemy(Enemy enemy)
         {
-            switch (layerHit)
+            if (Input.GetMouseButton(0) || (Input.GetMouseButtonDown(1)))
             {
-                case enemyLayerNumber:
-                    //navigate to the enemy
-                    GameObject enemy = raycastHit.collider.gameObject;
-                    aiCharacterControl.SetTarget(enemy.transform);
-                    break;
-                default:
-                    Debug.LogWarning("Don't know how to handle mouse click for player movement");
-                    return;
+                aiCharacterControl.SetTarget(enemy.transform);
             }
-
-        }
+        }       
 
         // TODO Make game pad work again later
         void ProcessDirectMovement()
