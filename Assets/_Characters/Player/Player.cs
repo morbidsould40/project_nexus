@@ -13,16 +13,16 @@ namespace RPG.Characters
     {
 
         [SerializeField] float maxHealthPoints = 100f;
+        [SerializeField] float baseDamage = 10;
         [SerializeField] Weapon weaponInUse = null;
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
-
-        // Temporarly seralizing for dubbing
-        [SerializeField] SpecialAbilityConfig ability1;
+        [SerializeField] SpecialAbility[] abilities;
 
         Animator animator;
         float currentHealthPoints;
         CameraRaycaster cameraRaycaster;
-        float lastHitTime = 0f;        
+        float lastHitTime = 0f;
+        float weaponDamage;
 
         public float healthAsPercentage
         {
@@ -35,7 +35,7 @@ namespace RPG.Characters
             SetCurrentMaxHealth();
             PutWeaponInHand();
             SetupRuntimeAnimator();
-            ability1.AddComponent(gameObject);
+            abilities[0].AttachComponentTo(gameObject);
 
         }
 
@@ -107,17 +107,20 @@ namespace RPG.Characters
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                AttemptSpecialAbility1(enemy);
+                AttemptSpecialAbility(0, enemy);
             }
         }
 
-        private void AttemptSpecialAbility1(Enemy enemy)
+        private void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
         {
             var energyComponent = GetComponent<Energy>();
-            if (energyComponent.IsEnergyAvailable(10f))
+            var energyCost = abilities[abilityIndex].GetEnergyCost();
+            weaponDamage = weaponInUse.GetDamagePerHit();
+            if (energyComponent.IsEnergyAvailable(energyCost))
             {
-                energyComponent.ConsumeEnergy(10f);
-                // TODO Use ability
+                energyComponent.ConsumeEnergy(energyCost);
+                var abilityParams = new AbilityUseParams(enemy, baseDamage, weaponDamage);
+                abilities[abilityIndex].Use(abilityParams);
             }
         }
 
@@ -126,7 +129,8 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger("Attack"); // TODO Make const
-                enemy.TakeDamage(weaponInUse.GetDamagePerHit());
+                enemy.TakeDamage(baseDamage + weaponInUse.GetDamagePerHit());
+                print("Normal Attack. Damage Dealt :" + (baseDamage + weaponInUse.GetDamagePerHit()));            
                 lastHitTime = Time.time;
             }
         }
