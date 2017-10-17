@@ -20,12 +20,6 @@ namespace RPG.Characters
             print("Power Attack behaviour attached to " + gameObject.name);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void Use(AbilityUseParams useParams)
         {
             print("base damage: " + useParams.baseDamage + ". weapon damage: " + useParams.weaponDamage + ".");
