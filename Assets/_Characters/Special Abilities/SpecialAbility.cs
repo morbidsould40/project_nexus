@@ -10,6 +10,13 @@ namespace RPG.Characters
         public IDamageable target;
         public float baseDamage;
         public float weaponDamage;
+        //public float radius;
+
+        //public AbilityUseParams(IDamageable target, float baseDamage)
+        //{
+        //    this.target = target;
+        //    this.baseDamage = baseDamage;
+        //}
 
         public AbilityUseParams(IDamageable target, float baseDamage, float weaponDamage)
         {
