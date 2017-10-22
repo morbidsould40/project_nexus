@@ -102,7 +102,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.45
+  m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1.04, z: 0}
@@ -2642,6 +2642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyBar: {fileID: 0}
   maxEnergyPoints: 100
+  regenPointsPerSecond: 10
   currentEnergyPoints: 0
 --- !u!114 &114805226847943214
 MonoBehaviour:
@@ -2660,7 +2661,17 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: f9c9c643f9fd2ce43be7e20101c61c2a,
     type: 2}
   abilities:
+  - {fileID: 11400000, guid: 83a7d2e82a976e9469d77dd05ccb7295, type: 2}
   - {fileID: 11400000, guid: 284afc9c407a91f41a010a3bd1c2bdf3, type: 2}
+  damageSounds:
+  - {fileID: 8300000, guid: 69dd8948b55edd9449af6ece4782d84b, type: 3}
+  - {fileID: 8300000, guid: 9d5637bc1296f6e4184fbc9283194770, type: 3}
+  - {fileID: 8300000, guid: d8dff2b3dbd37c4478c3f4f8aeada296, type: 3}
+  - {fileID: 8300000, guid: 6d71cf7fea7f7f142a27c91e4b06742d, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: d5e7154559af3b1448007acfc42a237c, type: 3}
+  - {fileID: 8300000, guid: bfc78c333db2d1d4193f965161eff8f6, type: 3}
+  - {fileID: 8300000, guid: d3d8c8d3b6cd8f84394b0b96a191fbf0, type: 3}
 --- !u!137 &137412010937458514
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2823,7 +2834,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 149790}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50

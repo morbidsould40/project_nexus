@@ -17,12 +17,16 @@ namespace RPG.Characters
         [SerializeField] Weapon weaponInUse = null;
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
         [SerializeField] SpecialAbility[] abilities;
+        [SerializeField] AudioClip[] damageSounds;
+        [SerializeField] AudioClip[] deathSounds;
 
+        AudioSource audioSource;
         Animator animator;
         float currentHealthPoints;
         CameraRaycaster cameraRaycaster;
         float lastHitTime = 0f;
         float weaponDamage;
+        bool playedDamageSoundRecently = false;
 
         public float healthAsPercentage
         {
@@ -36,25 +40,38 @@ namespace RPG.Characters
             PutWeaponInHand();
             SetupRuntimeAnimator();
             abilities[0].AttachComponentTo(gameObject);
-
+            audioSource = GetComponent<AudioSource>();
         }
 
         // Damage interface
         public void TakeDamage(float damage)
         {
-            ReduceHealth(damage);
+            ReduceHealth(damage);            
+            if (!playedDamageSoundRecently)
+            {
+                StartCoroutine(PlayDamageSounds());
+            }
             bool playerDies = (currentHealthPoints - damage <= 0);
-            if  (playerDies)
-            {                
+            if (playerDies)
+            {
                 StartCoroutine(KillPlayer());
             }
         }
 
+        IEnumerator PlayDamageSounds()
+        {
+            playedDamageSoundRecently = true;
+            audioSource.clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(3f);
+            playedDamageSoundRecently = false;
+        }
+
         IEnumerator KillPlayer()
         {
-            print("This is the player's Death Sound triggering");
-            print("This is the player's Death Animation triggering");
-            yield return new WaitForSecondsRealtime(3f); // TODO use audio clip length later
+            audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
+            audioSource.Play();
+            yield return new WaitForSecondsRealtime(audioSource.clip.length);
             SceneManager.LoadScene(0);
         }
 
@@ -87,6 +104,8 @@ namespace RPG.Characters
             weapon.transform.localRotation = weaponInUse.gripTransform.localRotation;
         }
 
+        // TODO Remove old dominant hand code once my RequestDominantHand method is thoroughly tested
+        // Old Dominant Hand script. Leaving in case my code breaks I have reference
         /*private GameObject RequestDominantHand()
         {
             var dominantHands = GetComponentsInChildren<DominantHand>();
@@ -109,7 +128,7 @@ namespace RPG.Characters
                 var dominantHands = GetComponentsInChildren<DominantHandLeft>();
                 return dominantHands[0].gameObject;
             }
-            return null;
+            return null;             
         }
         
         private void RegisterForMouseClick()

@@ -236,6 +236,7 @@
     <None Include="Assets\_Characters\Models\Warlord\clothshader.shader" />
     <None Include="Assets\_Characters\Models\Warlord\particledistort.shader" />
     <None Include="Assets\_Characters\Models\Warlord\reflectAdd.shader" />
+    <None Include="Assets\_Characters\Player\Audio\sound reference.txt" />
     <None Include="Assets\_Environment\MedievalTownExteriors\Readme.txt" />
     <None Include="Assets\_Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\_Environment\Water\Water\Shaders\FXWaterPro.shader" />

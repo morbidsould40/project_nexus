@@ -1,0 +1,10 @@
+Hurt sounds
+4
+11
+12
+17
+
+Death sounds
+1
+3
+6
