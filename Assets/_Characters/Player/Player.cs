@@ -20,6 +20,9 @@ namespace RPG.Characters
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
 
+        const string DEATH_TRIGGER = "Death";
+        const string ATTACK_TRIGGER = "Attack";
+
         AudioSource audioSource;
         Animator animator;
         float currentHealthPoints;
@@ -46,12 +49,12 @@ namespace RPG.Characters
         // Damage interface
         public void TakeDamage(float damage)
         {
+            bool playerDies = (currentHealthPoints - damage <= 0);
             ReduceHealth(damage);            
             if (!playedDamageSoundRecently)
             {
                 StartCoroutine(PlayDamageSounds());
-            }
-            bool playerDies = (currentHealthPoints - damage <= 0);
+            }            
             if (playerDies)
             {
                 StartCoroutine(KillPlayer());
@@ -69,6 +72,7 @@ namespace RPG.Characters
 
         IEnumerator KillPlayer()
         {
+            animator.SetTrigger(DEATH_TRIGGER);
             audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
             audioSource.Play();
             yield return new WaitForSecondsRealtime(audioSource.clip.length);
@@ -166,7 +170,7 @@ namespace RPG.Characters
         {
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
-                animator.SetTrigger("Attack"); // TODO Make const
+                animator.SetTrigger(ATTACK_TRIGGER);
                 enemy.TakeDamage(baseDamage + weaponInUse.GetDamagePerHit());
                 print("Normal Attack. Damage Dealt :" + (baseDamage + weaponInUse.GetDamagePerHit()));            
                 lastHitTime = Time.time;
