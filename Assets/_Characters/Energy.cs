@@ -9,11 +9,9 @@ namespace RPG.Characters
         [SerializeField] Image energyOrb = null;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 10f;
-
-
+        
         public float currentEnergyPoints;
  
-
         // Use this for initialization
         void Start()
         {
@@ -23,8 +21,7 @@ namespace RPG.Characters
 
         void Update()
         {
-            AddEnergyPoints();
-            
+            AddEnergyPoints();            
         }
 
         private void AddEnergyPoints()

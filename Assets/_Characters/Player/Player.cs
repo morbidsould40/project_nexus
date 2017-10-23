@@ -11,7 +11,6 @@ namespace RPG.Characters
 {
     public class Player : MonoBehaviour, IDamageable
     {
-
         [SerializeField] float maxHealthPoints = 100f;
         [SerializeField] float baseDamage = 10;
         [SerializeField] Weapon weaponInUse = null;
