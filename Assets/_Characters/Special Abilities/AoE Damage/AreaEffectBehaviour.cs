@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using RPG.Core;
 
 namespace RPG.Characters
 {
     public class AreaEffectBehaviour : MonoBehaviour, ISpecialAbility
     {
-
         AreaEffectConfig config;
 
         public void SetConfig(AreaEffectConfig configToSet)
@@ -15,13 +12,22 @@ namespace RPG.Characters
             this.config = configToSet;
         }
 
-        // Use this for initialization
-        void Start()
+        public void Use(AbilityUseParams useParams)
         {
-            print("AoE Attack behaviour attached to " + gameObject.name);
+            DealRadialDamage(useParams);
+            PlayParticleEffect();
         }
 
-        public void Use(AbilityUseParams useParams)
+        private void PlayParticleEffect()
+        {
+            var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity);
+            // TODO Decide if particle system attaches to player
+            ParticleSystem myParticleSystem = prefab.GetComponent<ParticleSystem>();
+            myParticleSystem.Play();
+            Destroy(prefab, myParticleSystem.main.duration);
+        }
+
+        private void DealRadialDamage(AbilityUseParams useParams)
         {
             print("AoE Attack used by " + gameObject.name);
             // Static Sphere Cast for targets
@@ -32,7 +38,7 @@ namespace RPG.Characters
                 if (damagable != null)
                 {
                     float damageToDeal = useParams.baseDamage + config.GetDamageToEachTarget();
-                    damagable.TakeDamage(damageToDeal);
+                    damagable.AdjustHealth(damageToDeal);
                 }
             }
         }

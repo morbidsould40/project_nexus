@@ -16,7 +16,7 @@ namespace RPG.Characters
         void Start()
         {
             currentEnergyPoints = maxEnergyPoints;
-            UpdateEnergyOrb();
+            //UpdateEnergyOrb();
         }
 
         void Update()

@@ -32,7 +32,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.04, y: 0, z: 0}
+  m_LocalPosition: {x: 2.05, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4460128457950404}
@@ -86,8 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 1800
-  m_StationaryTurnSpeed: 900
+  m_MovingTurnSpeed: 1000
+  m_StationaryTurnSpeed: 800
   m_JumpPower: 6
   m_GravityMultiplier: 2
   m_RunCycleLegOffset: 0.3
@@ -2742,8 +2742,9 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: f9c9c643f9fd2ce43be7e20101c61c2a,
     type: 2}
   abilities:
-  - {fileID: 11400000, guid: 83a7d2e82a976e9469d77dd05ccb7295, type: 2}
+  - {fileID: 11400000, guid: 7d6fda94a8e1d464992a6f09b2ad13f7, type: 2}
   - {fileID: 11400000, guid: 284afc9c407a91f41a010a3bd1c2bdf3, type: 2}
+  - {fileID: 11400000, guid: 83a7d2e82a976e9469d77dd05ccb7295, type: 2}
   damageSounds:
   - {fileID: 8300000, guid: 69dd8948b55edd9449af6ece4782d84b, type: 3}
   - {fileID: 8300000, guid: 9d5637bc1296f6e4184fbc9283194770, type: 3}

@@ -46,16 +46,17 @@ namespace RPG.Characters
         }
 
         // Damage interface
-        public void TakeDamage(float damage)
+        public void AdjustHealth(float amountChanged)
         {
-            bool playerDies = (currentHealthPoints - damage <= 0);
-            ReduceHealth(damage);            
+            bool playerDies = (currentHealthPoints - amountChanged <= 0);
+            ReduceHealth(amountChanged);            
             if (!playedDamageSoundRecently)
             {
                 StartCoroutine(PlayDamageSounds());
             }            
             if (playerDies)
             {
+                StopCoroutine(PlayDamageSounds());
                 StartCoroutine(KillPlayer());
             }
         }
@@ -170,7 +171,7 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger(ATTACK_TRIGGER);
-                enemy.TakeDamage(baseDamage + weaponInUse.GetDamagePerHit());
+                enemy.AdjustHealth(baseDamage + weaponInUse.GetDamagePerHit());
                 print("Normal Attack. Damage Dealt :" + (baseDamage + weaponInUse.GetDamagePerHit()));            
                 lastHitTime = Time.time;
             }
