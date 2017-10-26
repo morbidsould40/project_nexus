@@ -1,29 +1,26 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace RPG.Characters
 {
     public class Energy : MonoBehaviour
     {
-        [SerializeField] RawImage energyBar = null;
+        [SerializeField] Image energyOrb = null;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 10f;
-
-
+        
         public float currentEnergyPoints;
  
-
         // Use this for initialization
         void Start()
         {
-            currentEnergyPoints = maxEnergyPoints;            
+            currentEnergyPoints = maxEnergyPoints;
+            //UpdateEnergyOrb();
         }
 
         void Update()
         {
-            AddEnergyPoints();
-            
+            AddEnergyPoints();            
         }
 
         private void AddEnergyPoints()
@@ -32,7 +29,7 @@ namespace RPG.Characters
             {
                 var pointsToAdd = regenPointsPerSecond * Time.deltaTime;
                 currentEnergyPoints = Mathf.Clamp(currentEnergyPoints + pointsToAdd, 0, maxEnergyPoints);
-                UpdateEnergyBar();
+                UpdateEnergyOrb();
             }
         }
 
@@ -45,13 +42,12 @@ namespace RPG.Characters
         {
             float newEnergyPoints = currentEnergyPoints - amount;
             currentEnergyPoints = Mathf.Clamp(newEnergyPoints, 0, maxEnergyPoints);
-            UpdateEnergyBar();
+            UpdateEnergyOrb();
         }
 
-        private void UpdateEnergyBar()
+        private void UpdateEnergyOrb()
         {
-            float xValue = -(EnergyAsPercent() / 2f) - 0.5f;
-            energyBar.uvRect = new Rect(xValue, 0f, 0.5f, 1f);
+            energyOrb.fillAmount = EnergyAsPercent();
         }
 
         float EnergyAsPercent()

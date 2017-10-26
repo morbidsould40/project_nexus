@@ -31,7 +31,7 @@ namespace RPG.Abilities
             Component damageableComponent = collider.gameObject.GetComponent(typeof(IDamageable));
             if (damageableComponent)
             {
-                (damageableComponent as IDamageable).TakeDamage(damageCaused);
+                (damageableComponent as IDamageable).AdjustHealth(damageCaused);
             }
 
             fieryParticle.SetActive(false);

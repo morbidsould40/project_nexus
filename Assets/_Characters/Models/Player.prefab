@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 114385567965838538}
   - component: {fileID: 114805226847943214}
   - component: {fileID: 114548257440466036}
+  - component: {fileID: 82450735247343932}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -30,8 +31,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149790}
-  m_LocalRotation: {x: -0, y: 0.20964353, z: -0, w: 0.97777796}
-  m_LocalPosition: {x: 21.72, y: 0, z: 17.96}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.05, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4460128457950404}
@@ -41,7 +42,7 @@ Transform:
   - {fileID: 4276155079289680}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 153.391, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5426510
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -85,8 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 1800
-  m_StationaryTurnSpeed: 900
+  m_MovingTurnSpeed: 1000
+  m_StationaryTurnSpeed: 800
   m_JumpPower: 6
   m_GravityMultiplier: 2
   m_RunCycleLegOffset: 0.3
@@ -102,7 +103,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.45
+  m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1.04, z: 0}
@@ -2584,6 +2585,86 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1124459025535764}
   m_Mesh: {fileID: 4300000, guid: ffaf641b210f5ea41952cf36f1379d66, type: 3}
+--- !u!82 &82450735247343932
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149790}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114108972885468256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2640,8 +2721,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f38ecdb2bf0ce4088629c909c4736a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyBar: {fileID: 0}
+  energyOrb: {fileID: 0}
   maxEnergyPoints: 100
+  regenPointsPerSecond: 3
   currentEnergyPoints: 0
 --- !u!114 &114805226847943214
 MonoBehaviour:
@@ -2660,7 +2742,18 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: f9c9c643f9fd2ce43be7e20101c61c2a,
     type: 2}
   abilities:
+  - {fileID: 11400000, guid: 7d6fda94a8e1d464992a6f09b2ad13f7, type: 2}
   - {fileID: 11400000, guid: 284afc9c407a91f41a010a3bd1c2bdf3, type: 2}
+  - {fileID: 11400000, guid: 83a7d2e82a976e9469d77dd05ccb7295, type: 2}
+  damageSounds:
+  - {fileID: 8300000, guid: 69dd8948b55edd9449af6ece4782d84b, type: 3}
+  - {fileID: 8300000, guid: 9d5637bc1296f6e4184fbc9283194770, type: 3}
+  - {fileID: 8300000, guid: d8dff2b3dbd37c4478c3f4f8aeada296, type: 3}
+  - {fileID: 8300000, guid: 6d71cf7fea7f7f142a27c91e4b06742d, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: d5e7154559af3b1448007acfc42a237c, type: 3}
+  - {fileID: 8300000, guid: bfc78c333db2d1d4193f965161eff8f6, type: 3}
+  - {fileID: 8300000, guid: d3d8c8d3b6cd8f84394b0b96a191fbf0, type: 3}
 --- !u!137 &137412010937458514
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2823,7 +2916,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 149790}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50

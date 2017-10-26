@@ -8,12 +8,12 @@ namespace RPG.Characters
 {
     public class Enemy : MonoBehaviour, IDamageable
     {
-
         [SerializeField] float maxHealthPoints = 100;
         [SerializeField] float attackRadius = 5f;
         [SerializeField] float chaseRadius = 3f;
         [SerializeField] float damagePerShot = 8f;
-        [SerializeField] float secondsBetweenShots = 0.5f;
+        [SerializeField] float firingPeriodInSeconds = 0.5f;
+        [SerializeField] float firingPeriodVariation = 0.2f;
         [SerializeField] GameObject projectileToUse;
         [SerializeField] GameObject projectileSocket;
         [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
@@ -21,7 +21,7 @@ namespace RPG.Characters
         bool isAttacking = false;
         float currentHealthPoints;
         AICharacterControl aiCharacterControl = null;
-        GameObject player = null;
+        Player player = null;
 
         public float healthAsPercentage
         {
@@ -30,19 +30,26 @@ namespace RPG.Characters
 
         private void Start()
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            player = FindObjectOfType<Player>();
             aiCharacterControl = GetComponent<AICharacterControl>();
             currentHealthPoints = maxHealthPoints;
         }
 
         private void Update()
         {
+            if (player.healthAsPercentage <= Mathf.Epsilon)
+            {
+                StopAllCoroutines();
+                Destroy(this); // To stop enemy behaviour
+            }
+            
             // Attack player if in attack range
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             if (distanceToPlayer <= attackRadius && !isAttacking)
             {
                 isAttacking = true;
-                InvokeRepeating("FireProjectile", 0f, secondsBetweenShots); // TODO Switch to coroutines
+                float randomizedDelay = Random.Range(firingPeriodInSeconds - firingPeriodVariation, firingPeriodInSeconds + firingPeriodVariation);
+                InvokeRepeating("FireProjectile", 0f, randomizedDelay);
             }
 
             // Stop attacking player if outside attack range
@@ -76,13 +83,13 @@ namespace RPG.Characters
             newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
         }
 
-        public void TakeDamage(float damage)
+        public void AdjustHealth(float damage)
         {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            if (currentHealthPoints <= 0)
+            if (currentHealthPoints - damage <= 0)
             {
                 Destroy(gameObject);
             }
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);            
         }
 
         void OnDrawGizmos()

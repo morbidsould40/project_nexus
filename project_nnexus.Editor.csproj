@@ -154,6 +154,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\ceDungeonGenerator.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Attributes\PostProcessingModelEditorAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Models\AmbientOcclusionModelEditor.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Models\AntialiasingModelEditor.cs" />
@@ -235,6 +236,7 @@
     <None Include="Assets\_Characters\Models\Warlord\clothshader.shader" />
     <None Include="Assets\_Characters\Models\Warlord\particledistort.shader" />
     <None Include="Assets\_Characters\Models\Warlord\reflectAdd.shader" />
+    <None Include="Assets\_Characters\Player\Audio\sound reference.txt" />
     <None Include="Assets\_Environment\MedievalTownExteriors\Readme.txt" />
     <None Include="Assets\_Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\_Environment\Water\Water\Shaders\FXWaterPro.shader" />
