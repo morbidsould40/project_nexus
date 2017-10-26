@@ -29,9 +29,7 @@ namespace RPG.Characters
 
         private void DealDamage(AbilityUseParams useParams)
         {
-            print("base damage: " + useParams.baseDamage + ". weapon damage: " + useParams.weaponDamage + ".");
             float damageToDeal = ((useParams.baseDamage + useParams.weaponDamage) * config.GetExtraDamage());
-            print("Power Attack. Damage Dealt: " + damageToDeal);
             useParams.target.AdjustHealth(damageToDeal);
         }
     }

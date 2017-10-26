@@ -29,13 +29,13 @@ namespace RPG.Characters
 
         private void DealRadialDamage(AbilityUseParams useParams)
         {
-            print("AoE Attack used by " + gameObject.name);
             // Static Sphere Cast for targets
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, config.GetRadius(), Vector3.up, config.GetRadius());
             foreach (RaycastHit hit in hits)
             {
                 var damagable = hit.collider.gameObject.GetComponent<IDamageable>();
-                if (damagable != null)
+                bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
+                if (damagable != null && !hitPlayer)
                 {
                     float damageToDeal = useParams.baseDamage + config.GetDamageToEachTarget();
                     damagable.AdjustHealth(damageToDeal);
