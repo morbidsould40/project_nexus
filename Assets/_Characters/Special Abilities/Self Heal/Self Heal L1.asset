@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Name: Self Heal L1
   m_EditorClassIdentifier: 
   energyCost: 20
-  particlePrefab: {fileID: 0}
+  particlePrefab: {fileID: 1171343253240246, guid: c5f869f725348974cb442a0b70163ba6,
+    type: 2}
+  audioClip: {fileID: 8300000, guid: a6cc34a0171a2844c9a37e8266d00ac0, type: 3}
   amountToHeal: 200

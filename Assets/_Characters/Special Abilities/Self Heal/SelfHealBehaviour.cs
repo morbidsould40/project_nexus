@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +7,14 @@ namespace RPG.Characters
 {
     public class SelfHealBehaviour : MonoBehaviour, ISpecialAbility
     {
-        SelfHealConfig config;
-        Player player;
+        SelfHealConfig config = null;
+        Player player = null;
+        AudioSource audioSource = null;
 
         void Start()
         {
             player = GetComponent<Player>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         public void SetConfig(SelfHealConfig configToSet)
@@ -21,14 +24,21 @@ namespace RPG.Characters
 
         public void Use(AbilityUseParams useParams)
         {
-            player.AdjustHealth(-config.GetAmountToHeal());
+            player.Heal(config.GetAmountToHeal());
             PlayParticleEffect();
+            PlayAudioEffect();
+        }
+
+        private void PlayAudioEffect()
+        {
+            audioSource.clip = config.GetAudioClip();
+            audioSource.Play();
         }
 
         private void PlayParticleEffect()
         {
             var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity);
-            // TODO Decide if particle system attaches to player
+            prefab.transform.parent = transform;
             ParticleSystem myParticleSystem = prefab.GetComponent<ParticleSystem>();
             myParticleSystem.Play();
             Destroy(prefab, myParticleSystem.main.duration);

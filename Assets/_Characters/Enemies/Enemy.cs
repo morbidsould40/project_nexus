@@ -83,7 +83,7 @@ namespace RPG.Characters
             newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
         }
 
-        public void AdjustHealth(float damage)
+        public void TakeDamage(float damage)
         {
             if (currentHealthPoints - damage <= 0)
             {

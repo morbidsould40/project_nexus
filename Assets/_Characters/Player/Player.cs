@@ -14,7 +14,7 @@ namespace RPG.Characters
         [SerializeField] float baseDamage = 10;
         [SerializeField] Weapon weaponInUse = null;
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
-        [SerializeField] SpecialAbility[] abilities;
+        [SerializeField] AbilityConfig[] abilities;
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
 
@@ -73,19 +73,22 @@ namespace RPG.Characters
         }
 
         // Damage interface
-        public void AdjustHealth(float amountChanged)
+        public void TakeDamage(float damage)
         {
-            bool playerDies = (currentHealthPoints - amountChanged <= 0);
-            ReduceHealth(amountChanged);            
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
             if (!playedDamageSoundRecently)
             {
                 StartCoroutine(PlayDamageSounds());
             }            
-            if (playerDies)
+            if (currentHealthPoints <= 0)
             {
-                StopCoroutine(PlayDamageSounds());
                 StartCoroutine(KillPlayer());
             }
+        }
+
+        public void Heal(float points)
+        {
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
         }
 
         IEnumerator PlayDamageSounds()
@@ -104,12 +107,6 @@ namespace RPG.Characters
             audioSource.Play();
             yield return new WaitForSecondsRealtime(audioSource.clip.length);
             SceneManager.LoadScene(0);
-        }
-
-        private void ReduceHealth(float damage)
-        {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            // play hit sound and animations
         }
 
         private void SetCurrentMaxHealth()
@@ -199,7 +196,7 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger(ATTACK_TRIGGER);
-                enemy.AdjustHealth(baseDamage + weaponInUse.GetDamagePerHit());
+                enemy.TakeDamage(baseDamage + weaponInUse.GetDamagePerHit());
                 print("Normal Attack. Damage Dealt :" + (baseDamage + weaponInUse.GetDamagePerHit()));            
                 lastHitTime = Time.time;
             }
