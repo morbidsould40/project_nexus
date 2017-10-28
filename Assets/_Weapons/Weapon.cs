@@ -23,7 +23,8 @@ namespace RPG.Weapons
         [SerializeField] AnimationClip attackAnimation;
         [SerializeField] AnimationClip idleAnimation;
         [SerializeField] AnimationClip runAnimation;
-        [SerializeField] float damagePerHit = 2f;
+        [SerializeField] float minDamagePerHit = 2f;
+        [SerializeField] float maxDamagePerHit = 5f;
         [SerializeField] float minTimeBetweenHits = 1f;
         [SerializeField] float maxMeleeRange = 2f;
         [SerializeField] WeaponHands weaponHands;
@@ -40,9 +41,14 @@ namespace RPG.Weapons
             return maxMeleeRange;
         }
 
-        public float GetDamagePerHit()
+        public float GetMinDamagePerHit()
         {
-            return damagePerHit;
+            return minDamagePerHit;
+        }
+
+        public float GetMaxDamagePerHit()
+        {
+            return maxDamagePerHit;
         }
 
         public GameObject GetWeaponPrefab()

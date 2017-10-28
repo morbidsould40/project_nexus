@@ -10,17 +10,21 @@ namespace RPG.Characters
 {
     public class Player : MonoBehaviour, IDamageable
     {
-        [SerializeField] float maxHealthPoints = 100f;
-        [SerializeField] float baseDamage = 10;
-        [SerializeField] Weapon weaponInUse = null;
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
+        [SerializeField] Weapon weaponInUse = null;        
         [SerializeField] AbilityConfig[] abilities;
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
+        [SerializeField] float maxHealthPoints = 100f;        
+        [SerializeField] float baseDamage = 10;
+        [Range(.0f, 1.0f)] [SerializeField] float criticalHitChance = .1f;
+        [SerializeField] float criticalHitMultiplier = 1.25f;
+        [SerializeField] ParticleSystem criticalHitParticle = null;
 
         const string DEATH_TRIGGER = "Death";
         const string ATTACK_TRIGGER = "Attack";
 
+        
         Enemy enemy = null;
         AudioSource audioSource = null;
         Animator animator = null;
@@ -182,7 +186,7 @@ namespace RPG.Characters
         {
             var energyComponent = GetComponent<Energy>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();
-            weaponDamage = weaponInUse.GetDamagePerHit();
+            weaponDamage = weaponInUse.GetMinDamagePerHit();
             if (energyComponent.IsEnergyAvailable(energyCost))
             {
                 energyComponent.ConsumeEnergy(energyCost);
@@ -196,10 +200,31 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBetweenHits())
             {
                 animator.SetTrigger(ATTACK_TRIGGER);
-                enemy.TakeDamage(baseDamage + weaponInUse.GetDamagePerHit());
-                print("Normal Attack. Damage Dealt :" + (baseDamage + weaponInUse.GetDamagePerHit()));            
+                enemy.TakeDamage(CalculateDamage());
+                print("Normal Attack. Damage Dealt :" + CalculateDamage());
                 lastHitTime = Time.time;
             }
+        }
+
+        private float CalculateDamage()
+        {
+            bool isCriticalHit = UnityEngine.Random.Range(0f, 1f) <= criticalHitChance;
+            float damageBeforeCritical = baseDamage + WeaponDamageRange();
+            if (isCriticalHit)
+            {
+                criticalHitParticle.Play();
+                return damageBeforeCritical * criticalHitMultiplier;
+            }
+            else
+            {
+                return damageBeforeCritical;
+            }
+        }
+
+        private float WeaponDamageRange()
+        {            
+            float damageRange = UnityEngine.Random.Range(weaponInUse.GetMinDamagePerHit(), weaponInUse.GetMaxDamagePerHit());           
+            return Mathf.Round(damageRange);
         }
 
         private bool IsTargetInRange(GameObject target)

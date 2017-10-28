@@ -3230,33 +3230,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 13615390, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 52baaeb214519f347a35cf0edfd262ff,
-        type: 2}
     - target: {fileID: 114548257440466036, guid: 7737647c22c1fc64a88d5cd030c352ce,
         type: 2}
       propertyPath: energyOrb
       value: 
       objectReference: {fileID: 490171547}
-    - target: {fileID: 114805226847943214, guid: 7737647c22c1fc64a88d5cd030c352ce,
-        type: 2}
-      propertyPath: abilities.Array.data[0]
+    - target: {fileID: 13615390, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
+      propertyPath: m_Material
       value: 
-      objectReference: {fileID: 11400000, guid: 284afc9c407a91f41a010a3bd1c2bdf3,
-        type: 2}
-    - target: {fileID: 114805226847943214, guid: 7737647c22c1fc64a88d5cd030c352ce,
-        type: 2}
-      propertyPath: abilities.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 83a7d2e82a976e9469d77dd05ccb7295,
-        type: 2}
-    - target: {fileID: 114805226847943214, guid: 7737647c22c1fc64a88d5cd030c352ce,
-        type: 2}
-      propertyPath: abilities.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 7d6fda94a8e1d464992a6f09b2ad13f7,
+      objectReference: {fileID: 13400000, guid: 52baaeb214519f347a35cf0edfd262ff,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
