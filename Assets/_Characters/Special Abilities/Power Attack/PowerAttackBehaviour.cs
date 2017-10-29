@@ -5,31 +5,29 @@ namespace RPG.Characters
 {
     public class PowerAttackBehaviour : AbilityBehaviour
     {
-        PowerAttackConfig config;
+        AudioSource audioSource = null;
 
-        public void SetConfig(PowerAttackConfig configToSet)
+        void Start()
         {
-            this.config = configToSet;
+            audioSource = GetComponent<AudioSource>();
         }
 
         public override void Use(AbilityUseParams useParams)
         {
             DealDamage(useParams);
             PlayParticleEffect();
+            PlayAudio();
         }
 
-        private void PlayParticleEffect()
+        private void PlayAudio()
         {
-            var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity);
-            // TODO Decide if particle system attaches to player
-            ParticleSystem myParticleSystem = prefab.GetComponent<ParticleSystem>();
-            myParticleSystem.Play();
-            Destroy(prefab, myParticleSystem.main.duration);
+            audioSource.clip = config.GetAudioClip();
+            audioSource.Play();
         }
 
         private void DealDamage(AbilityUseParams useParams)
         {
-            float damageToDeal = ((useParams.baseDamage + useParams.weaponDamage) * config.GetExtraDamage());
+            float damageToDeal = ((useParams.baseDamage + useParams.weaponDamage) * (config as PowerAttackConfig).GetExtraDamage());
             useParams.target.TakeDamage(damageToDeal);
         }
     }
