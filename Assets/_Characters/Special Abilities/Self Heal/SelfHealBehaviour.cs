@@ -8,25 +8,17 @@ namespace RPG.Characters
     public class SelfHealBehaviour : AbilityBehaviour
     {
         Player player = null;
-        AudioSource audioSource = null;
 
         void Start()
         {
             player = GetComponent<Player>();
-            audioSource = GetComponent<AudioSource>();
         }
 
         public override void Use(AbilityUseParams useParams)
         {
             player.Heal((config as SelfHealConfig).GetAmountToHeal());
             PlayParticleEffect();
-            PlayAudio();
+            PlayAbilitySound();
         }
-
-        private void PlayAudio()
-        {
-            audioSource.clip = config.GetAudioClip();
-            audioSource.Play();
-        }  
     }
 }

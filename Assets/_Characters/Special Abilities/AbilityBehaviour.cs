@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Characters
@@ -35,6 +34,13 @@ namespace RPG.Characters
             }
             Destroy(particlePrefab);
             yield return new WaitForEndOfFrame();
+        }
+
+        protected void PlayAbilitySound()
+        {
+            var abilitySound = config.GetRandomAbilitySounds();
+            var audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(abilitySound);
         }
 
     }

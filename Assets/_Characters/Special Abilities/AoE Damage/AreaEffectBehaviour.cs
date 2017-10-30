@@ -5,24 +5,11 @@ namespace RPG.Characters
 {
     public class AreaEffectBehaviour : AbilityBehaviour
     {
-        AudioSource audioSource = null;
-
-        void Start()
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
-
         public override void Use(AbilityUseParams useParams)
         {
             DealRadialDamage(useParams);
             PlayParticleEffect();
-            PlayAudio();
-        }
-
-        private void PlayAudio()
-        {
-            audioSource.clip = config.GetAudioClip();
-            audioSource.Play();
+            PlayAbilitySound();
         }
 
         private void DealRadialDamage(AbilityUseParams useParams)
