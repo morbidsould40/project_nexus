@@ -38,9 +38,9 @@ namespace RPG.Characters
 
         public abstract AbilityBehaviour GetBehaviourComponent(GameObject objectToAttachTo);
 
-        public void AttachAbilityTo(GameObject objectToAttachTo)
+        public void AttachAbilityTo(GameObject objectToattachTo)
         {
-            AbilityBehaviour behaviourComponent = GetBehaviourComponent(objectToAttachTo);
+            AbilityBehaviour behaviourComponent = GetBehaviourComponent(objectToattachTo);
             behaviourComponent.SetConfig(this);
             behaviour = behaviourComponent;
         }
