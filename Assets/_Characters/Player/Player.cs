@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 using RPG.CameraUI; // TODO consider rewiring
 using RPG.Core;
 using RPG.Weapons;
-using System;
 
 namespace RPG.Characters
 {
@@ -47,6 +46,11 @@ namespace RPG.Characters
             PutWeaponInHand();
             SetupRuntimeAnimator();
             AttachInitialAbilities();            
+        }
+
+        public void PutWeaponInHand(Weapon weaponConfig)
+        {
+            
         }
 
         private void AttachInitialAbilities()
