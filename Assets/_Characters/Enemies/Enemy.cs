@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using RPG.Core;
-using RPG.Weapons;
 
 namespace RPG.Characters
 {
