@@ -26,21 +26,21 @@ namespace RPG.Abilities
 
         }
 
-        void OnTriggerEnter(Collider collider)
-        {
-            Component damageableComponent = collider.gameObject.GetComponent(typeof(IDamageable));
-            if (damageableComponent)
-            {
-                (damageableComponent as IDamageable).TakeDamage(damageCaused);
-            }
+        //void OnTriggerEnter(Collider collider)
+        //{
+        //    Component damageableComponent = collider.gameObject.GetComponent(typeof(IDamageable));
+        //    if (damageableComponent)
+        //    {
+        //        (damageableComponent as IDamageable).TakeDamage(damageCaused);
+        //    }
 
-            fieryParticle.SetActive(false);
-            smokeParticle.SetActive(false);
-            explosionParticle.SetActive(true);
-            rgbd.constraints = RigidbodyConstraints.FreezeAll;
-            Destroy(gameObject.GetComponent(typeof(Collider)));
-            Destroy(gameObject, 2);
-        }
+        //    fieryParticle.SetActive(false);
+        //    smokeParticle.SetActive(false);
+        //    explosionParticle.SetActive(true);
+        //    rgbd.constraints = RigidbodyConstraints.FreezeAll;
+        //    Destroy(gameObject.GetComponent(typeof(Collider)));
+        //    Destroy(gameObject, 2);
+        //}
     }
 }
 

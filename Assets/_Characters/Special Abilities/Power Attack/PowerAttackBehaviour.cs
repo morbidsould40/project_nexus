@@ -5,17 +5,17 @@ namespace RPG.Characters
 {
     public class PowerAttackBehaviour : AbilityBehaviour
     {
-        public override void Use(AbilityUseParams useParams)
+        public override void Use(GameObject target)
         {
-            DealDamage(useParams);
+            DealDamage(target);
             PlayParticleEffect();
             PlayAbilitySound();
         }
 
-        private void DealDamage(AbilityUseParams useParams)
+        private void DealDamage(GameObject target)
         {
-            float damageToDeal = ((useParams.baseDamage + useParams.weaponDamage) * (config as PowerAttackConfig).GetExtraDamage());
-            useParams.target.TakeDamage(damageToDeal);            
+            float damageToDeal = (config as PowerAttackConfig).GetExtraDamage();
+            target.GetComponent<HealthSystem>().TakeDamage(damageToDeal);            
         }
     }
 }
