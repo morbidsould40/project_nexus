@@ -141,17 +141,6 @@ namespace RPG.Characters
             animatorOverrideController[HUMANOID_RUN] = currentWeaponConfig.GetRunAnimClip();
         }
 
-        // TODO Remove old dominant hand code once my RequestDominantHand method is thoroughly tested
-        // Old Dominant Hand script. Leaving in case my code breaks I have reference
-        /*private GameObject RequestDominantHand()
-        {
-            var dominantHands = GetComponentsInChildren<DominantHand>();
-            int numberOfDominantHands = dominantHands.Length;
-            Assert.IsFalse(numberOfDominantHands <= 0, "No dominant hand found on player. Please add one.");
-            Assert.IsFalse(numberOfDominantHands > 1, "Multiple dominant hand scripts on player. Please remove one.");
-            return dominantHands[0].gameObject;
-        }*/
-
         private GameObject RequestDominantHand()
         {
             var handed = currentWeaponConfig.GetDominantGrip();
