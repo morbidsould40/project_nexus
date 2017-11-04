@@ -8,32 +8,32 @@ namespace RPG.Characters
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] AnimatorOverrideController animatorOverrideController = null;
-        [SerializeField] Weapon currentWeaponConfig = null;        
-        [SerializeField] AbilityConfig[] abilities;                      
+        [SerializeField] AnimatorOverrideController animatorOverrideController;
+        [SerializeField] Weapon currentWeaponConfig;                              
         [SerializeField] float baseDamage = 10;
         [Range(.0f, 1.0f)] [SerializeField] float criticalHitChance = .1f;
         [SerializeField] float criticalHitMultiplier = 1.25f;
-        [SerializeField] ParticleSystem criticalHitParticle = null;
+        [SerializeField] ParticleSystem criticalHitParticle;
                 
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
         const string HUMANOID_IDLE = "HumanoidIdle";
         const string HUMANOID_RUN = "HumanoidRun";
                 
-        Enemy enemy = null;        
-        Animator animator = null;        
-        CameraRaycaster cameraRaycaster = null;
+        Enemy enemy;        
+        Animator animator;        
+        CameraRaycaster cameraRaycaster;
         float lastHitTime = 0f;
-        float weaponDamage = 0f;        
         GameObject weaponObject;
+        SpecialAbilities abilities;
 
         void Start()
         {
+            abilities = GetComponent<SpecialAbilities>();
+
             RegisterForMouseClick();
             PutWeaponInHand(currentWeaponConfig);
-            SetupWeaponAnimations();
-            AttachInitialAbilities();            
+            SetupWeaponAnimations();                        
         }
 
         public void PutWeaponInHand(Weapon weaponToUse)
@@ -46,15 +46,7 @@ namespace RPG.Characters
             weaponObject.transform.localPosition = currentWeaponConfig.gripTransform.localPosition;
             weaponObject.transform.localRotation = currentWeaponConfig.gripTransform.localRotation;
             SetupWeaponAnimations();
-        }
-
-        private void AttachInitialAbilities()
-        {
-            for (int abilityIndex = 0; abilityIndex < abilities.Length; abilityIndex++)
-            {
-                abilities[abilityIndex].AttachAbilityTo(gameObject);
-            }            
-        }
+        }        
 
         void Update()
         {
@@ -67,11 +59,11 @@ namespace RPG.Characters
 
         private void ScanForAbilityKeyDown()
         {
-            for (int keyIndex = 1; keyIndex < abilities.Length; keyIndex++)
+            for (int keyIndex = 1; keyIndex < abilities.GetNumberOfAbilities(); keyIndex++)
             {
                 if (Input.GetKeyDown(keyIndex.ToString()))
                 {
-                    AttemptSpecialAbility(keyIndex);
+                    abilities.AttemptSpecialAbility(keyIndex);
                 }
             }
         }              
@@ -116,24 +108,11 @@ namespace RPG.Characters
             }
             else if (Input.GetMouseButtonDown(1))
             {
-                AttemptSpecialAbility(0);
+                abilities.AttemptSpecialAbility(0);
             }
         }
 
-        private void AttemptSpecialAbility(int abilityIndex)
-        {
-            var energyComponent = GetComponent<Energy>();
-            var energyCost = abilities[abilityIndex].GetEnergyCost();
-            weaponDamage = currentWeaponConfig.GetMinDamagePerHit();
-            if (energyComponent.IsEnergyAvailable(energyCost))
-            {
-                energyComponent.ConsumeEnergy(energyCost);
-                var abilityParams = new AbilityUseParams(enemy, baseDamage, weaponDamage);
-                abilities[abilityIndex].Use(abilityParams);
-            }
-        }
-
-        private void AttackTarget()
+       private void AttackTarget()
         {
             if (Time.time - lastHitTime > currentWeaponConfig.GetMinTimeBetweenHits())
             {

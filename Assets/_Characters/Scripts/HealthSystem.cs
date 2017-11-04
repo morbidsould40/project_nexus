@@ -22,10 +22,7 @@ namespace RPG.Characters
         float currentHealthPoints;
         bool playedDamageSoundRecently = false;
 
-        public float healthAsPercentage
-        {
-            get { return currentHealthPoints / maxHealthPoints; }
-        }
+        public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
         void Start()
         {

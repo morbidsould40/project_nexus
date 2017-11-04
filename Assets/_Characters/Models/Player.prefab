@@ -2726,6 +2726,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f38ecdb2bf0ce4088629c909c4736a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilities:
+  - {fileID: 11400000, guid: 284afc9c407a91f41a010a3bd1c2bdf3, type: 2}
+  - {fileID: 11400000, guid: 83a7d2e82a976e9469d77dd05ccb7295, type: 2}
+  - {fileID: 11400000, guid: 7d6fda94a8e1d464992a6f09b2ad13f7, type: 2}
   energyOrb: {fileID: 0}
   maxEnergyPoints: 100
   regenPointsPerSecond: 3
@@ -2745,10 +2749,6 @@ MonoBehaviour:
     type: 2}
   currentWeaponConfig: {fileID: 11400000, guid: 15cd6a551f4d7454dbb15b9ae6883a55,
     type: 2}
-  abilities:
-  - {fileID: 11400000, guid: 284afc9c407a91f41a010a3bd1c2bdf3, type: 2}
-  - {fileID: 11400000, guid: 83a7d2e82a976e9469d77dd05ccb7295, type: 2}
-  - {fileID: 11400000, guid: 7d6fda94a8e1d464992a6f09b2ad13f7, type: 2}
   baseDamage: 10
   criticalHitChance: 0.1
   criticalHitMultiplier: 1.25
