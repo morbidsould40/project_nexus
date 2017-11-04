@@ -3,9 +3,8 @@ using RPG.Core;
 
 namespace RPG.Characters
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour, IDamageable // remove IDamagable interface
     {
-        [SerializeField] float maxHealthPoints = 100;
         [SerializeField] float attackRadius = 5f;
         [SerializeField] float chaseRadius = 3f;
         [SerializeField] float damagePerShot = 8f;
@@ -16,28 +15,20 @@ namespace RPG.Characters
         [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
         bool isAttacking = false;
-        float currentHealthPoints;
-        Player player = null;
-
-        public float healthAsPercentage
-        {
-            get { return currentHealthPoints / maxHealthPoints; }
-        }
+        Player player;
 
         private void Start()
         {
             player = FindObjectOfType<Player>();
-            currentHealthPoints = maxHealthPoints;
+        }
+
+        public void TakeDamage(float amount)
+        {
+            // TODO remove
         }
 
         private void Update()
         {
-            if (player.healthAsPercentage <= Mathf.Epsilon)
-            {
-                StopAllCoroutines();
-                Destroy(this); // To stop enemy behaviour
-            }
-            
             // Attack player if in attack range
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             if (distanceToPlayer <= attackRadius && !isAttacking)
@@ -76,15 +67,6 @@ namespace RPG.Characters
             Vector3 unitVectorToPlayer = (player.transform.position + aimOffset - projectileSocket.transform.position).normalized;
             float projectileSpeed = projectileComponent.GetDefaultLaunchSpeed();
             newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
-        }
-
-        public void TakeDamage(float damage)
-        {
-            if (currentHealthPoints - damage <= 0)
-            {
-                Destroy(gameObject);
-            }
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);            
         }
 
         void OnDrawGizmos()

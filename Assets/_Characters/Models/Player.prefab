@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 5426510}
   - component: {fileID: 13615390}
   - component: {fileID: 195425337001721614}
+  - component: {fileID: 82450735247343932}
   - component: {fileID: 114385567965838538}
   - component: {fileID: 114805226847943214}
   - component: {fileID: 114548257440466036}
-  - component: {fileID: 82450735247343932}
+  - component: {fileID: 114985758150772064}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -2702,6 +2703,7 @@ MonoBehaviour:
   movingTurnSpeed: 360
   stationaryTurnSpeed: 180
   moveThreshold: 1
+  animationSpeedMultiplier: 1.5
 --- !u!114 &114437437399889916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2747,6 +2749,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 284afc9c407a91f41a010a3bd1c2bdf3, type: 2}
   - {fileID: 11400000, guid: 83a7d2e82a976e9469d77dd05ccb7295, type: 2}
   - {fileID: 11400000, guid: 7d6fda94a8e1d464992a6f09b2ad13f7, type: 2}
+  baseDamage: 10
+  criticalHitChance: 0.1
+  criticalHitMultiplier: 1.25
+  criticalHitParticle: {fileID: 198554949604999918}
+--- !u!114 &114985758150772064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de6688b0e14e0a440a9965b46c5a48d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealthPoints: 100
+  deathDespawnSeconds: 4
+  healthBar: {fileID: 0}
   damageSounds:
   - {fileID: 8300000, guid: 69dd8948b55edd9449af6ece4782d84b, type: 3}
   - {fileID: 8300000, guid: 9d5637bc1296f6e4184fbc9283194770, type: 3}
@@ -2756,11 +2776,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d5e7154559af3b1448007acfc42a237c, type: 3}
   - {fileID: 8300000, guid: bfc78c333db2d1d4193f965161eff8f6, type: 3}
   - {fileID: 8300000, guid: d3d8c8d3b6cd8f84394b0b96a191fbf0, type: 3}
-  maxHealthPoints: 1000
-  baseDamage: 10
-  criticalHitChance: 0.1
-  criticalHitMultiplier: 1.25
-  criticalHitParticle: {fileID: 198554949604999918}
 --- !u!137 &137412010937458514
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

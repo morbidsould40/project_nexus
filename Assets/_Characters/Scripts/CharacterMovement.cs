@@ -55,6 +55,18 @@ namespace RPG.Characters
             }
         }
 
+        public void Move(Vector3 movement)
+        {
+            SetForwardAndTurnMovement(movement);
+            ApplyExtraTurnRotation();
+            UpdateAnimator();
+        }
+
+        public void Kill()
+        {
+            // to allow death
+        }
+
         void OnMouseOverPotentiallyWalkable(Vector3 destination)
         {
             if (Input.GetMouseButton(0))
@@ -83,14 +95,7 @@ namespace RPG.Characters
                 velocity.y = rigidBody.velocity.y;
                 rigidBody.velocity = velocity;
             }
-        }
-
-        public void Move(Vector3 movement)
-        {
-            SetForwardAndTurnMovement(movement);
-            ApplyExtraTurnRotation();
-            UpdateAnimator();
-        }
+        }        
 
         void SetForwardAndTurnMovement(Vector3 movement)
         {
