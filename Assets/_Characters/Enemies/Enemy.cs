@@ -15,11 +15,11 @@ namespace RPG.Characters
         [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
         bool isAttacking = false;
-        Player player;
+        PlayerMovement player;
 
         private void Start()
         {
-            player = FindObjectOfType<Player>();
+            player = FindObjectOfType<PlayerMovement>();
         }
 
         public void TakeDamage(float amount)

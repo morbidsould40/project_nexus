@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using RPG.CameraUI; // TODO consider rewiring
-using RPG.Core;
+﻿using UnityEngine;
+using UnityEngine.Assertions;
+using RPG.CameraUI; // used for raycaster
 
 namespace RPG.Characters
 {
-    public class Player : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] AnimatorOverrideController animatorOverrideController;
         [SerializeField] Weapon currentWeaponConfig;                              
@@ -19,19 +17,21 @@ namespace RPG.Characters
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
         const string HUMANOID_IDLE = "HumanoidIdle";
         const string HUMANOID_RUN = "HumanoidRun";
-                
+
+        Character character;
         Enemy enemy;        
         Animator animator;        
-        CameraRaycaster cameraRaycaster;
-        float lastHitTime = 0f;
+        CameraRaycaster cameraRaycaster;        
         GameObject weaponObject;
         SpecialAbilities abilities;
+        float lastHitTime = 0f;
 
         void Start()
         {
+            character = GetComponent<Character>();
             abilities = GetComponent<SpecialAbilities>();
 
-            RegisterForMouseClick();
+            RegisterForMouseEvents();
             PutWeaponInHand(currentWeaponConfig);
             SetupWeaponAnimations();                        
         }
@@ -50,11 +50,7 @@ namespace RPG.Characters
 
         void Update()
         {
-            var healthPercentage = GetComponent<HealthSystem>().healthAsPercentage;
-            if (healthPercentage > Mathf.Epsilon)
-            {
-                ScanForAbilityKeyDown();
-            }
+            ScanForAbilityKeyDown();            
         }
 
         private void ScanForAbilityKeyDown()
@@ -66,37 +62,21 @@ namespace RPG.Characters
                     abilities.AttemptSpecialAbility(keyIndex);
                 }
             }
-        }              
-
-        private void SetupWeaponAnimations()
-        {
-            animator = GetComponent<Animator>();
-            animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
-            animatorOverrideController[HUMANOID_IDLE] = currentWeaponConfig.GetIdleAnimClip();
-            animatorOverrideController[HUMANOID_RUN] = currentWeaponConfig.GetRunAnimClip();
         }
 
-        private GameObject RequestDominantHand()
-        {
-            var handed = currentWeaponConfig.GetDominantGrip();
-            if (handed == Weapon.DominantGripHand.RightHand)
-            {
-                var dominantHands = GetComponentsInChildren<DominantHandRight>();
-                return dominantHands[0].gameObject;
-            }
-            if (handed == Weapon.DominantGripHand.LeftHand)
-            {
-                var dominantHands = GetComponentsInChildren<DominantHandLeft>();
-                return dominantHands[0].gameObject;
-            }
-            return null;             
-        }
-        
-        private void RegisterForMouseClick()
+        void RegisterForMouseEvents()
         {
             cameraRaycaster = FindObjectOfType<CameraRaycaster>();
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
+            cameraRaycaster.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
+        }
+
+        void OnMouseOverPotentiallyWalkable(Vector3 destination)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                character.SetDestination(destination);
+            }
         }
 
         void OnMouseOverEnemy(Enemy enemyToSet)
@@ -112,7 +92,32 @@ namespace RPG.Characters
             }
         }
 
-       private void AttackTarget()
+        void SetupWeaponAnimations()
+        {
+            animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = animatorOverrideController;
+            animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
+            animatorOverrideController[HUMANOID_IDLE] = currentWeaponConfig.GetIdleAnimClip();
+            animatorOverrideController[HUMANOID_RUN] = currentWeaponConfig.GetRunAnimClip();
+        }
+
+        GameObject RequestDominantHand()
+        {
+            var handed = currentWeaponConfig.GetDominantGrip();
+            if (handed == Weapon.DominantGripHand.RightHand)
+            {
+                var dominantHands = GetComponentsInChildren<DominantHandRight>();
+                return dominantHands[0].gameObject;
+            }
+            if (handed == Weapon.DominantGripHand.LeftHand)
+            {
+                var dominantHands = GetComponentsInChildren<DominantHandLeft>();
+                return dominantHands[0].gameObject;
+            }
+            return null;             
+        }
+        
+        void AttackTarget()
         {
             if (Time.time - lastHitTime > currentWeaponConfig.GetMinTimeBetweenHits())
             {
@@ -122,7 +127,7 @@ namespace RPG.Characters
             }
         }
 
-        private float CalculateDamage()
+        float CalculateDamage()
         {
             bool isCriticalHit = UnityEngine.Random.Range(0f, 1f) <= criticalHitChance;
             float damageBeforeCritical = baseDamage + WeaponDamageRange();
@@ -137,13 +142,13 @@ namespace RPG.Characters
             }
         }
 
-        private float WeaponDamageRange()
+        float WeaponDamageRange()
         {            
             float damageRange = UnityEngine.Random.Range(currentWeaponConfig.GetMinDamagePerHit(), currentWeaponConfig.GetMaxDamagePerHit());           
             return Mathf.Round(damageRange);
         }
 
-        private bool IsTargetInRange(GameObject target)
+        bool IsTargetInRange(GameObject target)
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             return distanceToTarget <= currentWeaponConfig.GetAttackRange();
