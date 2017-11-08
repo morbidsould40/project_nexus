@@ -10,7 +10,6 @@ namespace RPG.Characters
         [SerializeField] AudioClip outOfEnergy;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 10f;
-        // TODO Add out of energy sound and/or effects
         
         public float currentEnergyPoints;
         AudioSource audioSource;

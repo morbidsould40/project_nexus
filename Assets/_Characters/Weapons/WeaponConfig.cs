@@ -26,7 +26,7 @@ namespace RPG.Characters
         [SerializeField] float minDamagePerHit = 2f;
         [SerializeField] float maxDamagePerHit = 5f;
         [SerializeField] float minTimeBetweenHits = 1f;
-        [SerializeField] float maxMeleeRange = 2f;
+        [SerializeField] float maxAttackRange = 2f;
         [SerializeField] WeaponHands weaponHands;
         [SerializeField] DominantGripHand dominantGripHand;        
 
@@ -36,9 +36,9 @@ namespace RPG.Characters
             return minTimeBetweenHits;
         }
 
-        public float GetAttackRange()
+        public float GetMaxAttackRange()
         {
-            return maxMeleeRange;
+            return maxAttackRange;
         }
 
         public float GetMinDamagePerHit()

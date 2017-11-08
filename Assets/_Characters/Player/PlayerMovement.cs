@@ -6,7 +6,7 @@ namespace RPG.Characters
     public class PlayerMovement : MonoBehaviour
     {
         Character character;
-        Enemy enemy;                    
+        EnemyAI enemy;                    
         CameraRaycaster cameraRaycaster;        
         SpecialAbilities abilities;
         WeaponSystem weaponSystem;        
@@ -51,7 +51,7 @@ namespace RPG.Characters
             }
         }
 
-        void OnMouseOverEnemy(Enemy enemyToSet)
+        void OnMouseOverEnemy(EnemyAI enemyToSet)
         {
             this.enemy = enemyToSet;
             if (Input.GetMouseButton(0) && IsTargetInRange(enemy.gameObject))
@@ -67,7 +67,7 @@ namespace RPG.Characters
         bool IsTargetInRange(GameObject target)
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
-            return distanceToTarget <= weaponSystem.GetCurrentWeapon().GetAttackRange();
+            return distanceToTarget <= weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
         }
     }
 }
