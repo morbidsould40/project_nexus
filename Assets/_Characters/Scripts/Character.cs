@@ -39,12 +39,17 @@ namespace RPG.Characters
         float forwardAmount;
         bool isAlive = true;
 
+        public AnimatorOverrideController GetAnimatorOverrideController()
+        {
+            return animatorOverrideController;
+        }
+
         void Awake()
         {
             AddRequiredComponents();
         }
 
-        private void AddRequiredComponents()
+        void AddRequiredComponents()
         {
             animator = gameObject.AddComponent<Animator>();
             animator.runtimeAnimatorController = animatorController;
