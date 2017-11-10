@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace RPG.Characters
@@ -8,6 +9,10 @@ namespace RPG.Characters
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] float chaseRadius = 3f;
+        [SerializeField] float waypointTolerance = 2.0f;        
+        [SerializeField] float patrolSpeed = 0.2f;
+        [SerializeField] float animateSpeed = 0.4f;
+        [SerializeField] WaypointContainer patrolPath;
 
         //[SerializeField] float damagePerShot = 8f;
         //[SerializeField] float firingPeriodInSeconds = 0.5f;
@@ -19,6 +24,9 @@ namespace RPG.Characters
 
         float currentWeaponRange = 5f;
         float distanceToPlayer;
+        float defaultMoveSpeedMultiplier;
+        float defaultAnimationSpeedMultiplier;
+        int nextWaypointIndex;
         PlayerMovement player;
         Character character;
 
@@ -30,6 +38,9 @@ namespace RPG.Characters
             character = GetComponent<Character>();
 
             player = FindObjectOfType<PlayerMovement>();
+            defaultMoveSpeedMultiplier = character.moveSpeedMultiplier;
+            defaultAnimationSpeedMultiplier = character.animationSpeedMultiplier;
+
         }
 
         private void Update()
@@ -42,7 +53,7 @@ namespace RPG.Characters
             if (distanceToPlayer > chaseRadius && state != EnemyState.patrolling)
             {
                 StopAllCoroutines();
-                state = EnemyState.patrolling;
+                StartCoroutine(Patrol());
             }
             if (distanceToPlayer <= chaseRadius && state != EnemyState.chasing)
             {
@@ -56,9 +67,33 @@ namespace RPG.Characters
             }            
         }
 
+        IEnumerator Patrol()
+        {
+            state = EnemyState.patrolling;
+            while (true)
+            {
+                Vector3 nextWaypointPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
+                character.SetDestination(nextWaypointPos);                
+                character.moveSpeedMultiplier = patrolSpeed;
+                character.animationSpeedMultiplier = animateSpeed;
+                CycleWaypointWhenClose(nextWaypointPos);                               
+                yield return new WaitForSeconds(3.0f);
+            }
+        }
+
+        private void CycleWaypointWhenClose(Vector3 nextWaypointPos)
+        {
+            if (Vector3.Distance(transform.position, nextWaypointPos) <= waypointTolerance)
+            {
+                nextWaypointIndex = (nextWaypointIndex + 1) % patrolPath.transform.childCount;
+            }
+        }
+
         IEnumerator ChasePlayer()
         {
             state = EnemyState.chasing;
+            character.moveSpeedMultiplier = defaultMoveSpeedMultiplier;
+            character.animationSpeedMultiplier = defaultAnimationSpeedMultiplier;
             while (distanceToPlayer >= currentWeaponRange)
             {
                 character.SetDestination(player.transform.position);

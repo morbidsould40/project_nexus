@@ -22,11 +22,11 @@ namespace RPG.Characters
         [SerializeField] float colliderHeight = 2.03f;
 
         [Header("Movement")]
-        [SerializeField] float moveSpeedMultiplier = 0.7f;
+        public float moveSpeedMultiplier = 0.7f;
+        public float animationSpeedMultiplier = 1.5f;
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
-        [SerializeField] float moveThreshold = 1.0f;
-        [SerializeField] float animationSpeedMultiplier = 1.5f;
+        [SerializeField] float moveThreshold = 1.0f;        
 
         [Header("NavMesh Agent")]
         [SerializeField] float navMeshAgentSteeringSpeed = 1.0f;

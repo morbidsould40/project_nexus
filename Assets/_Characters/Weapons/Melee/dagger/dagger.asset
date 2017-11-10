@@ -18,6 +18,9 @@ MonoBehaviour:
   attackAnimation: {fileID: 7400000, guid: 32dbe676b3c566c4a9836c244bb478dd, type: 3}
   idleAnimation: {fileID: 7400000, guid: 5c0b1be3522a16f4c8519b02a90a980d, type: 3}
   runAnimation: {fileID: 7400000, guid: 347deb13f172b5b418bf8b5c60941b68, type: 3}
-  damagePerHit: 12
+  minDamagePerHit: 2
+  maxDamagePerHit: 5
   minTimeBetweenHits: 0.5
-  maxMeleeRange: 1
+  maxAttackRange: 2
+  weaponHands: 0
+  dominantGripHand: 0
