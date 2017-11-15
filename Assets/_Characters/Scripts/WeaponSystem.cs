@@ -5,7 +5,6 @@ namespace RPG.Characters
 {
     public class WeaponSystem : MonoBehaviour
     {
-
         [SerializeField] WeaponConfig currentWeaponConfig;
         [SerializeField] float baseDamage = 10;
         //[Range(.0f, 1.0f)] [SerializeField] float criticalHitChance = .1f;
@@ -39,14 +38,38 @@ namespace RPG.Characters
 
         void Update()
         {
+            bool targetIsDead;
+            bool targetIsOutOfRange;
 
+            if (target == null)
+            {
+                targetIsDead = false;
+                targetIsOutOfRange = false;            
+            }
+            else
+            {
+                // check to see if target is dead
+                var targetHealth = target.GetComponent<HealthSystem>().healthAsPercentage;
+                targetIsDead = targetHealth <= Mathf.Epsilon;
+
+                // check to0 see if target is out of range
+                var distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+                targetIsOutOfRange = distanceToTarget > currentWeaponConfig.GetMaxAttackRange();
+            }
+
+            float characterHealth = GetComponent<HealthSystem>().healthAsPercentage;
+            bool characterIsDead = (characterHealth <= Mathf.Epsilon);
+
+            if (characterIsDead || targetIsOutOfRange || targetIsDead)
+            {
+                StopAllCoroutines();
+            }
         }
 
         public void AttackTarget(GameObject targetToAttack)
         {
             target = targetToAttack;
-            StartCoroutine(AttackTargetRepeatedly());
-            
+            StartCoroutine(AttackTargetRepeatedly());            
         }
 
         IEnumerator AttackTargetRepeatedly()
@@ -59,9 +82,7 @@ namespace RPG.Characters
             {
                 float weaponHitPeriod = currentWeaponConfig.GetMinTimeBetweenHits();
                 float timeToWait = weaponHitPeriod * character.animationSpeedMultiplier;
-
                 bool isTimeToHitAgain = Time.time - lastHitTime > timeToWait;
-
                 if (isTimeToHitAgain)
                 {
                     AttackTargetOnce();

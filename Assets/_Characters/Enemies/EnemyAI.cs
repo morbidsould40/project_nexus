@@ -22,7 +22,6 @@ namespace RPG.Characters
         //[SerializeField] GameObject projectileSocket;
         //[SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
-
         float currentWeaponRange = 5f;
         float distanceToPlayer;
         float defaultMoveSpeedMultiplier;
@@ -41,7 +40,6 @@ namespace RPG.Characters
             player = FindObjectOfType<PlayerMovement>();
             defaultMoveSpeedMultiplier = character.moveSpeedMultiplier;
             defaultAnimationSpeedMultiplier = character.animationSpeedMultiplier;
-
         }
 
         private void Update()
