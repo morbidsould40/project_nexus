@@ -6,12 +6,13 @@ namespace RPG.Characters
 {
     [RequireComponent(typeof(Character))]
     [RequireComponent(typeof(WeaponSystem))]
+    [RequireComponent(typeof(HealthSystem))]
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] float chaseRadius = 3f;
         [SerializeField] float waypointTolerance = 2.0f;        
-        [SerializeField] float patrolSpeed = 0.2f;
-        [SerializeField] float animateSpeed = 0.4f;
+        [SerializeField] float patrolSpeed = 0.4f;
+        [SerializeField] float animateSpeed = 0.8f;
         [SerializeField] WaypointContainer patrolPath;
 
         //[SerializeField] float damagePerShot = 8f;
