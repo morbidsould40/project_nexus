@@ -27,7 +27,7 @@ namespace RPG.Characters
         float defaultMoveSpeedMultiplier;
         float defaultAnimationSpeedMultiplier;
         int nextWaypointIndex;
-        PlayerMovement player;
+        PlayerControl player;
         Character character;
 
         enum EnemyState { idle, attacking, patrolling, chasing}
@@ -37,7 +37,7 @@ namespace RPG.Characters
         {
             character = GetComponent<Character>();
 
-            player = FindObjectOfType<PlayerMovement>();
+            player = FindObjectOfType<PlayerControl>();
             defaultMoveSpeedMultiplier = character.moveSpeedMultiplier;
             defaultAnimationSpeedMultiplier = character.animationSpeedMultiplier;
         }
@@ -69,7 +69,7 @@ namespace RPG.Characters
         IEnumerator Patrol()
         {
             state = EnemyState.patrolling;
-            while (true)
+            while (patrolPath != null)
             {
                 Vector3 nextWaypointPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
                 character.SetDestination(nextWaypointPos);                
