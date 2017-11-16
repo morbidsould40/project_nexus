@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace RPG.Characters
@@ -10,17 +9,11 @@ namespace RPG.Characters
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] float chaseRadius = 3f;
-        [SerializeField] float waypointTolerance = 2.0f;        
+        [SerializeField] float waypointTolerance = 2.0f;
+        [SerializeField] float waypointWaitTime = 3.0f;
         [SerializeField] float patrolSpeed = 0.4f;
         [SerializeField] float animateSpeed = 0.8f;
         [SerializeField] WaypointContainer patrolPath;
-
-        //[SerializeField] float damagePerShot = 8f;
-        //[SerializeField] float firingPeriodInSeconds = 0.5f;
-        //[SerializeField] float firingPeriodVariation = 0.2f;
-        //[SerializeField] GameObject projectileToUse;
-        //[SerializeField] GameObject projectileSocket;
-        //[SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
         float currentWeaponRange = 5f;
         float distanceToPlayer;
@@ -29,8 +22,8 @@ namespace RPG.Characters
         int nextWaypointIndex;
         PlayerControl player;
         Character character;
-
         enum EnemyState { idle, attacking, patrolling, chasing}
+
         EnemyState state = EnemyState.idle;
 
         private void Start()
@@ -52,17 +45,19 @@ namespace RPG.Characters
             if (distanceToPlayer > chaseRadius && state != EnemyState.patrolling)
             {
                 StopAllCoroutines();
+                weaponSystem.StopAttacking();
                 StartCoroutine(Patrol());
             }
             if (distanceToPlayer <= chaseRadius && state != EnemyState.chasing)
             {
                 StopAllCoroutines();
+                weaponSystem.StopAttacking();
                 StartCoroutine(ChasePlayer());
             }
             if (distanceToPlayer <= currentWeaponRange && state != EnemyState.attacking)
             {
                 StopAllCoroutines();
-                state = EnemyState.attacking;
+                weaponSystem.AttackTarget(player.gameObject);
             }            
         }
 
@@ -76,7 +71,7 @@ namespace RPG.Characters
                 character.moveSpeedMultiplier = patrolSpeed;
                 character.animationSpeedMultiplier = animateSpeed;
                 CycleWaypointWhenClose(nextWaypointPos);                               
-                yield return new WaitForSeconds(3.0f);
+                yield return new WaitForSeconds(waypointWaitTime);
             }
         }
 
@@ -99,19 +94,6 @@ namespace RPG.Characters
                 yield return new WaitForEndOfFrame();
             }
         }
-
-        // TODO seperate out Character firing logic
-        //void FireProjectile()
-        //{
-        //    GameObject newProjectile = Instantiate(projectileToUse, projectileSocket.transform.position, Quaternion.identity);
-        //    Projectile projectileComponent = newProjectile.GetComponent<Projectile>();
-        //    projectileComponent.SetDamage(damagePerShot);
-        //    projectileComponent.SetShooter(gameObject);
-
-        //    Vector3 unitVectorToPlayer = (player.transform.position + aimOffset - projectileSocket.transform.position).normalized;
-        //    float projectileSpeed = projectileComponent.GetDefaultLaunchSpeed();
-        //    newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * projectileSpeed;
-        //}
 
         void OnDrawGizmos()
         {

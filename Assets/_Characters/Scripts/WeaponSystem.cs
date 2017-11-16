@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace RPG.Characters
 {
@@ -64,6 +65,11 @@ namespace RPG.Characters
             {
                 StopAllCoroutines();
             }
+        }
+
+        public void StopAttacking()
+        {
+            StopAllCoroutines();
         }
 
         public void AttackTarget(GameObject targetToAttack)
