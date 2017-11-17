@@ -15,13 +15,14 @@ namespace RPG.Characters
         [SerializeField] float animateSpeed = 0.8f;
         [SerializeField] WaypointContainer patrolPath;
 
-        float currentWeaponRange = 5f;
+        float currentWeaponRange;
         float distanceToPlayer;
         float defaultMoveSpeedMultiplier;
         float defaultAnimationSpeedMultiplier;
         int nextWaypointIndex;
         PlayerControl player;
         Character character;
+        WeaponSystem weaponSystem;
         enum EnemyState { idle, attacking, patrolling, chasing}
 
         EnemyState state = EnemyState.idle;
@@ -33,13 +34,14 @@ namespace RPG.Characters
             player = FindObjectOfType<PlayerControl>();
             defaultMoveSpeedMultiplier = character.moveSpeedMultiplier;
             defaultAnimationSpeedMultiplier = character.animationSpeedMultiplier;
+            weaponSystem = GetComponent<WeaponSystem>();
+            currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
         }
 
         private void Update()
         {
             // Attack player if in attack range
-            distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-            WeaponSystem weaponSystem = GetComponent<WeaponSystem>();
+            distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);            
             currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
 
             if (distanceToPlayer > chaseRadius && state != EnemyState.patrolling)
