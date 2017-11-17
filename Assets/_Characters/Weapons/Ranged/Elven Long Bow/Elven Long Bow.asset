@@ -22,6 +22,7 @@ MonoBehaviour:
   maxDamagePerHit: 5
   minTimeBetweenHits: 1.5
   maxAttackRange: 6
+  minAttackRange: 5.5
   damageDelay: 0.5
   weaponHands: 1
   dominantGripHand: 1

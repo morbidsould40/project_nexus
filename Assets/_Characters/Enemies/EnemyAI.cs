@@ -58,7 +58,7 @@ namespace RPG.Characters
             }
             if (distanceToPlayer <= currentWeaponRange && state != EnemyState.attacking)
             {
-                StopAllCoroutines();
+                StopAllCoroutines();                
                 weaponSystem.AttackTarget(player.gameObject);
             }            
         }
@@ -90,9 +90,13 @@ namespace RPG.Characters
             state = EnemyState.chasing;
             character.moveSpeedMultiplier = defaultMoveSpeedMultiplier;
             character.animationSpeedMultiplier = defaultAnimationSpeedMultiplier;
+            var minRangedDistance = weaponSystem.GetCurrentWeapon().GetMinAttackRange();
+            float rangedDistance = Vector3.Distance(player.transform.position, character.transform.position) - minRangedDistance;
+            Vector3 offset = -character.transform.forward;
+            offset *= rangedDistance;
             while (distanceToPlayer >= currentWeaponRange)
             {
-                character.SetDestination(player.transform.position);
+                character.SetDestination(player.transform.position + offset);
                 yield return new WaitForEndOfFrame();
             }
         }
