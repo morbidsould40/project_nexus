@@ -44,21 +44,26 @@ namespace RPG.Characters
             distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);            
             currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
 
-            if (distanceToPlayer > chaseRadius && state != EnemyState.patrolling)
+            bool inWeaponRadius = distanceToPlayer <= currentWeaponRange;
+            bool inChaseRadius = distanceToPlayer > currentWeaponRange && distanceToPlayer <= chaseRadius;
+            bool outsideChaseRadius = distanceToPlayer > chaseRadius;
+
+            if (outsideChaseRadius)
             {
                 StopAllCoroutines();
                 weaponSystem.StopAttacking();
                 StartCoroutine(Patrol());
             }
-            if (distanceToPlayer <= chaseRadius && state != EnemyState.chasing)
+            if (inChaseRadius)
             {
                 StopAllCoroutines();
                 weaponSystem.StopAttacking();
                 StartCoroutine(ChasePlayer());
             }
-            if (distanceToPlayer <= currentWeaponRange && state != EnemyState.attacking)
+            if (inWeaponRadius)
             {
-                StopAllCoroutines();                
+                StopAllCoroutines();
+                state = EnemyState.attacking;
                 weaponSystem.AttackTarget(player.gameObject);
             }            
         }
@@ -90,13 +95,13 @@ namespace RPG.Characters
             state = EnemyState.chasing;
             character.moveSpeedMultiplier = defaultMoveSpeedMultiplier;
             character.animationSpeedMultiplier = defaultAnimationSpeedMultiplier;
-            var minRangedDistance = weaponSystem.GetCurrentWeapon().GetMinAttackRange();
-            float rangedDistance = Vector3.Distance(player.transform.position, character.transform.position) - minRangedDistance;
-            Vector3 offset = -character.transform.forward;
-            offset *= rangedDistance;
+            //var minRangedDistance = weaponSystem.GetCurrentWeapon().GetMinAttackRange();
+            //float rangedDistance = Vector3.Distance(player.transform.position, character.transform.position) - minRangedDistance;
+            //Vector3 offset = -character.transform.forward;
+            //offset *= rangedDistance;
             while (distanceToPlayer >= currentWeaponRange)
             {
-                character.SetDestination(player.transform.position + offset);
+                character.SetDestination(player.transform.position);
                 yield return new WaitForEndOfFrame();
             }
         }
