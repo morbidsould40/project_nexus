@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 114548257440466036}
   - component: {fileID: 114985758150772064}
   - component: {fileID: 114271365223745146}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2297,7 +2297,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 284afc9c407a91f41a010a3bd1c2bdf3, type: 2}
   - {fileID: 11400000, guid: 83a7d2e82a976e9469d77dd05ccb7295, type: 2}
   - {fileID: 11400000, guid: 7d6fda94a8e1d464992a6f09b2ad13f7, type: 2}
-  energyOrb: {fileID: 0}
+  energyBar: {fileID: 0}
   outOfEnergy: {fileID: 8300000, guid: b5c2530d730a2454cbdf6a50715b73f7, type: 3}
   maxEnergyPoints: 100
   regenPointsPerSecond: 3
