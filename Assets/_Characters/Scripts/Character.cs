@@ -90,7 +90,11 @@ namespace RPG.Characters
 
         void Update()
         {
-            if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance && isAlive)
+            if (!navMeshAgent.isOnNavMesh)
+            {
+                Debug.LogError(gameObject.name + "is not on the nav mesh and could cause errors.");
+            }
+            else if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance && isAlive)
             {
                 Move(navMeshAgent.desiredVelocity);
             }
