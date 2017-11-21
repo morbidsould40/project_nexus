@@ -6,7 +6,7 @@ namespace RPG.Characters
     public class SpecialAbilities : MonoBehaviour
     {
         [SerializeField] AbilityConfig[] abilities;
-        [SerializeField] Image energyOrb = null;
+        [SerializeField] Image energyBar = null;
         [SerializeField] AudioClip outOfEnergy;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 10f;
@@ -42,7 +42,6 @@ namespace RPG.Characters
 
         public void AttemptSpecialAbility(int abilityIndex, GameObject target = null)
         {
-            var energyComponent = GetComponent<SpecialAbilities>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();
             if (energyCost <= currentEnergyPoints)
             {
@@ -64,10 +63,13 @@ namespace RPG.Characters
                 UpdateEnergyOrb();
             }
         }
-
+        
         void UpdateEnergyOrb()
         {
-            energyOrb.fillAmount = energyAsPercent;
+            if (energyBar)
+            {
+                energyBar.fillAmount = energyAsPercent;
+            }            
         }
 
         void AttachInitialAbilities()

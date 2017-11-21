@@ -25,17 +25,16 @@ namespace RPG.Characters
         [SerializeField] AnimationClip runAnimation;
         [SerializeField] float minDamagePerHit = 2f;
         [SerializeField] float maxDamagePerHit = 5f;
-        [SerializeField] float minTimeBetweenHits = 1f;
+        [SerializeField] float timeBetweenAnimationCycles = 1f;
         [SerializeField] float maxAttackRange = 2f;
         [SerializeField] float minAttackRange = 2f;
         [SerializeField] float damageDelay = 0.5f;
         [SerializeField] WeaponHands weaponHands;
         [SerializeField] DominantGripHand dominantGripHand;        
 
-        public float GetMinTimeBetweenHits()
+        public float GetTimeBetweenAnimationCycles()
         {
-            // TODO consider whether we take animation time into account
-            return minTimeBetweenHits;
+            return timeBetweenAnimationCycles;
         }
 
         public float GetDamageDelay()
@@ -99,7 +98,7 @@ namespace RPG.Characters
         // Remove animation events so that asset packs cannot cause crashes
         private void RemoveAnimationEvents()
         {
-            attackAnimation.events = new AnimationEvent[0];
+            attackAnimation.events = new AnimationEvent[0];                      
             idleAnimation.events = new AnimationEvent[0];
             runAnimation.events = new AnimationEvent[0];
         }

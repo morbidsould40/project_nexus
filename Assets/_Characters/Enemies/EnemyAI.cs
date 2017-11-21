@@ -9,10 +9,9 @@ namespace RPG.Characters
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] float chaseRadius = 3f;
-        [SerializeField] float waypointTolerance = 2.0f;
+        [SerializeField] float waypointTolerance = 1.0f;
         [SerializeField] float waypointWaitTime = 3.0f;
-        [SerializeField] float patrolSpeed = 0.4f;
-        [SerializeField] float animateSpeed = 0.8f;
+        [SerializeField] float patrolMovementSpeed = 0.5f;
         [SerializeField] WaypointContainer patrolPath;
 
         float currentWeaponRange;
@@ -32,8 +31,6 @@ namespace RPG.Characters
             character = GetComponent<Character>();
 
             player = FindObjectOfType<PlayerControl>();
-            defaultMoveSpeedMultiplier = character.moveSpeedMultiplier;
-            defaultAnimationSpeedMultiplier = character.animationSpeedMultiplier;
             weaponSystem = GetComponent<WeaponSystem>();
             currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
         }
@@ -74,11 +71,10 @@ namespace RPG.Characters
             while (patrolPath != null)
             {
                 Vector3 nextWaypointPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
+                character.AnimatorMaxPatrol = patrolMovementSpeed;
                 character.SetDestination(nextWaypointPos);                
-                character.moveSpeedMultiplier = patrolSpeed;
-                character.animationSpeedMultiplier = animateSpeed;
                 CycleWaypointWhenClose(nextWaypointPos);                               
-                yield return new WaitForSeconds(waypointWaitTime);
+                yield return new WaitForSecondsRealtime(waypointWaitTime);
             }
         }
 
@@ -93,14 +89,13 @@ namespace RPG.Characters
         IEnumerator ChasePlayer()
         {
             state = EnemyState.chasing;
-            character.moveSpeedMultiplier = defaultMoveSpeedMultiplier;
-            character.animationSpeedMultiplier = defaultAnimationSpeedMultiplier;
             //var minRangedDistance = weaponSystem.GetCurrentWeapon().GetMinAttackRange();
             //float rangedDistance = Vector3.Distance(player.transform.position, character.transform.position) - minRangedDistance;
             //Vector3 offset = -character.transform.forward;
             //offset *= rangedDistance;
             while (distanceToPlayer >= currentWeaponRange)
             {
+                character.AnimatorMaxPatrol = character.GetAnimatorMaxForward();
                 character.SetDestination(player.transform.position);
                 yield return new WaitForEndOfFrame();
             }

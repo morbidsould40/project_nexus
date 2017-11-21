@@ -12,6 +12,8 @@ namespace RPG.Characters
         [SerializeField] RuntimeAnimatorController animatorController;
         [SerializeField] AnimatorOverrideController animatorOverrideController;
         [SerializeField] Avatar characterAvatar;
+        [Range(0.1f, 1f)] [SerializeField] float animatorMaxForward = 1f;
+        [Range(0.1f, 1f)] public float animatorMaxPatrol = 0.5f;
 
         [Header("Audio")]
         [Range(0, 1.0f)] [SerializeField] float audioSourceSpatialBlend = 0.5f;
@@ -22,8 +24,8 @@ namespace RPG.Characters
         [SerializeField] float colliderHeight = 2.03f;
 
         [Header("Movement")]
-        public float moveSpeedMultiplier = 0.7f;
-        public float animationSpeedMultiplier = 1.5f;
+        [SerializeField] float moveSpeedMultiplier = 0.7f;
+        [SerializeField] float animationSpeedMultiplier = 1.5f;
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
         [SerializeField] float moveThreshold = 1.0f;        
@@ -43,6 +45,18 @@ namespace RPG.Characters
         {
             return animatorOverrideController;
         }
+
+        public float GetAnimationSpeedMultiplier()
+        {
+            return animationSpeedMultiplier;
+        }
+
+        public float GetAnimatorMaxForward()
+        {
+            return animatorMaxForward;
+        }
+
+        public float AnimatorMaxPatrol { get { return animatorMaxPatrol; } set { animatorMaxPatrol = value; } }
 
         void Awake()
         {
@@ -139,7 +153,7 @@ namespace RPG.Characters
 
         void UpdateAnimator()
         {
-            animator.SetFloat("Forward", forwardAmount, 0.1f, Time.deltaTime);
+            animator.SetFloat("Forward", forwardAmount * animatorMaxPatrol, 0.1f, Time.deltaTime);
             animator.SetFloat("Turn", turnAmount, 0.1f, Time.deltaTime);
             animator.speed = animationSpeedMultiplier;
         }

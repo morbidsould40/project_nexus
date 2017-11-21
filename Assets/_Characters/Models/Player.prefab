@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 10.62, y: 0, z: 9.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4997902450814394}
@@ -2269,15 +2269,17 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: f9c9c643f9fd2ce43be7e20101c61c2a,
     type: 2}
   characterAvatar: {fileID: 9000000, guid: ffaf641b210f5ea41952cf36f1379d66, type: 3}
+  animatorMaxForward: 1
+  animatorMaxPatrol: 1
   audioSourceSpatialBlend: 0.5
   colliderCenter: {x: 0, y: 1, z: 0}
   colliderRadius: 0.2
   colliderHeight: 1.65
-  moveSpeedMultiplier: 0.7
-  movingTurnSpeed: 360
-  stationaryTurnSpeed: 180
+  moveSpeedMultiplier: 0.6
+  animationSpeedMultiplier: 1.1
+  movingTurnSpeed: 1000
+  stationaryTurnSpeed: 800
   moveThreshold: 1
-  animationSpeedMultiplier: 1.5
   navMeshAgentSteeringSpeed: 1
   navMeshAgentStoppingDistance: 1.3
 --- !u!114 &114548257440466036
