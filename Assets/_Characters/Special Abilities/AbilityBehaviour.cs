@@ -7,6 +7,8 @@ namespace RPG.Characters
     {
         
         protected AbilityConfig config;
+        //PlayerControl playerControl;
+        //float coolDownTimer;
 
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK_STATE = "DEFAULT ATTACK";
@@ -54,5 +56,21 @@ namespace RPG.Characters
             audioSource.PlayOneShot(abilitySound);
         }
 
+        //protected void StartCoolDown()
+        //{
+        //    float coolDown = config.GetCoolDown();
+            
+            
+        //    if (coolDownTimer > 0)
+        //    {
+        //        coolDown -= Time.deltaTime;
+        //    }
+        //    if (coolDownTimer < 0)
+        //    {
+        //        coolDownTimer = 0f;
+        //    }
+        //    if (playerControl.ScanForAbilityKeyDown())
+            
+        //}
     }
 }

@@ -6,7 +6,7 @@ namespace RPG.Characters
     public class SpecialAbilities : MonoBehaviour
     {
         [SerializeField] AbilityConfig[] abilities;
-        [SerializeField] Image energyBar = null;
+        [SerializeField] Image energyBar;
         [SerializeField] AudioClip outOfEnergy;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 10f;

@@ -8,6 +8,7 @@ namespace RPG.Characters
 
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
+        [SerializeField] float coolDown = 0.25f;
         [SerializeField] GameObject particlePrefab;
         [SerializeField] AnimationClip abilityAnimation;
         [SerializeField] AudioClip[] audioClips;
@@ -31,6 +32,11 @@ namespace RPG.Characters
         public float GetEnergyCost()
         {
             return energyCost;
+        }
+
+        public float GetCoolDown()
+        {
+            return coolDown;
         }
 
         public GameObject GetParticlePrefab()

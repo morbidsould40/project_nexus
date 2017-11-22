@@ -39,25 +39,24 @@ namespace RPG.Characters
         {
             // Attack player if in attack range
             distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);            
-            currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
-
+           
             bool inWeaponRadius = distanceToPlayer <= currentWeaponRange;
-            bool inChaseRadius = distanceToPlayer > currentWeaponRange && distanceToPlayer <= chaseRadius;
+            bool inChaseRadius = distanceToPlayer <= chaseRadius;
             bool outsideChaseRadius = distanceToPlayer > chaseRadius;
 
-            if (outsideChaseRadius)
+            if (outsideChaseRadius && !inWeaponRadius)
             {
                 StopAllCoroutines();
                 weaponSystem.StopAttacking();
                 StartCoroutine(Patrol());
             }
-            if (inChaseRadius)
+            if (inChaseRadius && !inWeaponRadius)
             {
                 StopAllCoroutines();
                 weaponSystem.StopAttacking();
                 StartCoroutine(ChasePlayer());
             }
-            if (inWeaponRadius)
+            if (inWeaponRadius || (inChaseRadius && inWeaponRadius))
             {
                 StopAllCoroutines();
                 state = EnemyState.attacking;
@@ -93,7 +92,7 @@ namespace RPG.Characters
             //float rangedDistance = Vector3.Distance(player.transform.position, character.transform.position) - minRangedDistance;
             //Vector3 offset = -character.transform.forward;
             //offset *= rangedDistance;
-            while (distanceToPlayer >= currentWeaponRange)
+            while (distanceToPlayer <= chaseRadius)
             {
                 character.AnimatorMaxPatrol = character.GetAnimatorMaxForward();
                 character.SetDestination(player.transform.position);
