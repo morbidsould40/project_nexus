@@ -37,7 +37,7 @@ namespace RPG.Characters
         {
             float newEnergyPoints = currentEnergyPoints - amount;
             currentEnergyPoints = Mathf.Clamp(newEnergyPoints, 0, maxEnergyPoints);
-            UpdateEnergyOrb();
+            UpdateEnergyBar();
         }
 
         public void AttemptSpecialAbility(int abilityIndex, GameObject target = null)
@@ -54,17 +54,22 @@ namespace RPG.Characters
             }
         }
 
+        public float SpecialAbilityCoolDownTimer(int abilityIndex)
+        {
+            return abilities[abilityIndex].GetCoolDown();
+        }
+
         void AddEnergyPoints()
         {
             if (currentEnergyPoints < maxEnergyPoints)
             {
                 var pointsToAdd = regenPointsPerSecond * Time.deltaTime;
                 currentEnergyPoints = Mathf.Clamp(currentEnergyPoints + pointsToAdd, 0, maxEnergyPoints);
-                UpdateEnergyOrb();
+                UpdateEnergyBar();
             }
         }
         
-        void UpdateEnergyOrb()
+        void UpdateEnergyBar()
         {
             if (energyBar)
             {

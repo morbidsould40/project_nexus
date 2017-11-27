@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Characters
@@ -16,68 +18,65 @@ namespace RPG.Characters
 
         float currentWeaponRange;
         float distanceToPlayer;
-        float defaultMoveSpeedMultiplier;
-        float defaultAnimationSpeedMultiplier;
         int nextWaypointIndex;
         PlayerControl player;
         Character character;
-        WeaponSystem weaponSystem;
+
         enum EnemyState { idle, attacking, patrolling, chasing}
 
-        EnemyState state = EnemyState.idle;
+        EnemyState state;
 
         private void Start()
         {
+            state = EnemyState.idle;
             character = GetComponent<Character>();
-
             player = FindObjectOfType<PlayerControl>();
-            weaponSystem = GetComponent<WeaponSystem>();
-            currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
         }
 
-        private void Update()
-        {
-            // Attack player if in attack range
-            distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);            
-           
-            bool inWeaponRadius = distanceToPlayer <= currentWeaponRange;
-            bool inChaseRadius = distanceToPlayer <= chaseRadius;
-            bool outsideChaseRadius = distanceToPlayer > chaseRadius;
+        void Update()
+        {            
+            distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+            WeaponSystem weaponSystem = GetComponent<WeaponSystem>();
+            currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();            
 
-            if (outsideChaseRadius && !inWeaponRadius)
+            bool inWeaponCircle = distanceToPlayer <= currentWeaponRange;
+            bool inChaseRing = distanceToPlayer > currentWeaponRange && distanceToPlayer <= chaseRadius;
+            bool outsideChaseRing = distanceToPlayer > chaseRadius && distanceToPlayer > currentWeaponRange;
+
+            if (outsideChaseRing)
             {
                 StopAllCoroutines();
                 weaponSystem.StopAttacking();
                 StartCoroutine(Patrol());
             }
-            if (inChaseRadius && !inWeaponRadius)
+            if (inChaseRing)
             {
                 StopAllCoroutines();
                 weaponSystem.StopAttacking();
                 StartCoroutine(ChasePlayer());
             }
-            if (inWeaponRadius || (inChaseRadius && inWeaponRadius))
+            if (inWeaponCircle)
             {
                 StopAllCoroutines();
                 state = EnemyState.attacking;
                 weaponSystem.AttackTarget(player.gameObject);
-            }            
+            }
         }
 
         IEnumerator Patrol()
         {
             state = EnemyState.patrolling;
+
             while (patrolPath != null)
             {
                 Vector3 nextWaypointPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
-                character.AnimatorMaxPatrol = patrolMovementSpeed;
                 character.SetDestination(nextWaypointPos);                
-                CycleWaypointWhenClose(nextWaypointPos);                               
-                yield return new WaitForSecondsRealtime(waypointWaitTime);
+                yield return new WaitForSeconds(waypointWaitTime);
+                CycleWaypointWhenClose(nextWaypointPos);
             }
         }
 
-        private void CycleWaypointWhenClose(Vector3 nextWaypointPos)
+        void CycleWaypointWhenClose(Vector3 nextWaypointPos)
         {
             if (Vector3.Distance(transform.position, nextWaypointPos) <= waypointTolerance)
             {
@@ -88,13 +87,8 @@ namespace RPG.Characters
         IEnumerator ChasePlayer()
         {
             state = EnemyState.chasing;
-            //var minRangedDistance = weaponSystem.GetCurrentWeapon().GetMinAttackRange();
-            //float rangedDistance = Vector3.Distance(player.transform.position, character.transform.position) - minRangedDistance;
-            //Vector3 offset = -character.transform.forward;
-            //offset *= rangedDistance;
-            while (distanceToPlayer <= chaseRadius)
+            while (distanceToPlayer >= currentWeaponRange)
             {
-                character.AnimatorMaxPatrol = character.GetAnimatorMaxForward();
                 character.SetDestination(player.transform.position);
                 yield return new WaitForEndOfFrame();
             }

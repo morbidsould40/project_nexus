@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using RPG.Core;
+using UnityEngine.UI;
 
 namespace RPG.Characters
 {
@@ -10,6 +10,8 @@ namespace RPG.Characters
         [SerializeField] float energyCost = 10f;
         [SerializeField] float coolDown = 0.25f;
         [SerializeField] GameObject particlePrefab;
+        [SerializeField] Image backgroundIcon;
+        [SerializeField] Image coolDownIcon;
         [SerializeField] AnimationClip abilityAnimation;
         [SerializeField] AudioClip[] audioClips;
 
@@ -36,6 +38,7 @@ namespace RPG.Characters
 
         public float GetCoolDown()
         {
+            Debug.Log("Ability Config got cooldown");
             return coolDown;
         }
 
@@ -52,6 +55,16 @@ namespace RPG.Characters
         public AudioClip GetRandomAbilitySounds()
         {
             return audioClips[Random.Range(0, audioClips.Length)];
+        }
+
+        public Image GetBackgroundIcon()
+        {
+            return backgroundIcon;
+        }
+
+        public Image GetCoolDownIcon()
+        {
+            return coolDownIcon;
         }
     }
 }
