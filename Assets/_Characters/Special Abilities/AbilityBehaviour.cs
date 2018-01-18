@@ -7,6 +7,8 @@ namespace RPG.Characters
     {
         
         protected AbilityConfig config;
+        //PlayerControl playerControl;
+        //float coolDownTimer;
 
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK_STATE = "DEFAULT ATTACK";

@@ -53,7 +53,7 @@ namespace RPG.Characters
                 var targetHealth = target.GetComponent<HealthSystem>().healthAsPercentage;
                 targetIsDead = targetHealth <= Mathf.Epsilon;
 
-                // check to0 see if target is out of range
+                // check to see if target is out of range
                 var distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
                 targetIsOutOfRange = distanceToTarget > currentWeaponConfig.GetMaxAttackRange();
             }

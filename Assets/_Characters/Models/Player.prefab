@@ -26,8 +26,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149790}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.62, y: 0, z: 9.04}
+  m_LocalRotation: {x: -0, y: 0.97316056, z: -0, w: 0.23012707}
+  m_LocalPosition: {x: 0.5043793, y: -0.32, z: 0.22375488}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4997902450814394}
@@ -2265,7 +2265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a4762f61869b104eb1a78add148680d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorController: {fileID: 9100000, guid: 2bfcac8a4a8a9514fb6d7640a8568493, type: 2}
+  animatorController: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: f9c9c643f9fd2ce43be7e20101c61c2a,
     type: 2}
   characterAvatar: {fileID: 9000000, guid: ffaf641b210f5ea41952cf36f1379d66, type: 3}
