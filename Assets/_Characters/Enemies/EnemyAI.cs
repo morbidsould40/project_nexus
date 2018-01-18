@@ -22,7 +22,7 @@ namespace RPG.Characters
         PlayerControl player;
         Character character;
 
-        enum EnemyState { idle, attacking, patrolling, chasing}
+        enum EnemyState { idle, attacking, patrolling, chasing }
 
         EnemyState state;
 
@@ -34,15 +34,34 @@ namespace RPG.Characters
         }
 
         void Update()
-        {            
+        {
+            // TODO Rewrite all the code for patrolling to include for ranged attackers.
+            // minWeaponRange
+            // maxWeaponRange
+            // chaseRange
+            // patrolling
             distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             WeaponSystem weaponSystem = GetComponent<WeaponSystem>();
             currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();            
 
-            bool inWeaponCircle = distanceToPlayer <= currentWeaponRange;
-            bool inChaseRing = distanceToPlayer > currentWeaponRange && distanceToPlayer <= chaseRadius;
-            bool outsideChaseRing = distanceToPlayer > chaseRadius && distanceToPlayer > currentWeaponRange;
+            bool inWeaponCircle = distanceToPlayer <= currentWeaponRange && state != EnemyState.attacking;
+            bool inRangedCircle = distanceToPlayer <= currentWeaponRange && distanceToPlayer > chaseRadius && state != EnemyState.attacking;
+            bool inChaseRing = distanceToPlayer > currentWeaponRange && distanceToPlayer <= chaseRadius && state != EnemyState.chasing;
+            bool outsideChaseRing = distanceToPlayer > chaseRadius && distanceToPlayer > currentWeaponRange && state != EnemyState.patrolling;
 
+            if (inWeaponCircle)
+            {
+                StopAllCoroutines();
+                state = EnemyState.attacking;
+                weaponSystem.AttackTarget(player.gameObject);
+            }
+            if (inRangedCircle)
+            {
+                StopAllCoroutines();
+                state = EnemyState.attacking;
+                character.SetDestination(transform.position);
+                weaponSystem.AttackTarget(player.gameObject);
+            }
             if (outsideChaseRing)
             {
                 StopAllCoroutines();
@@ -54,13 +73,7 @@ namespace RPG.Characters
                 StopAllCoroutines();
                 weaponSystem.StopAttacking();
                 StartCoroutine(ChasePlayer());
-            }
-            if (inWeaponCircle)
-            {
-                StopAllCoroutines();
-                state = EnemyState.attacking;
-                weaponSystem.AttackTarget(player.gameObject);
-            }
+            }           
         }
 
         IEnumerator Patrol()
@@ -70,6 +83,7 @@ namespace RPG.Characters
             while (patrolPath != null)
             {
                 Vector3 nextWaypointPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
+                character.AnimatorMaxPatrol = patrolMovementSpeed;
                 character.SetDestination(nextWaypointPos);                
                 yield return new WaitForSeconds(waypointWaitTime);
                 CycleWaypointWhenClose(nextWaypointPos);
@@ -89,6 +103,7 @@ namespace RPG.Characters
             state = EnemyState.chasing;
             while (distanceToPlayer >= currentWeaponRange)
             {
+                character.AnimatorMaxPatrol = character.GetAnimatorMaxForward();
                 character.SetDestination(player.transform.position);
                 yield return new WaitForEndOfFrame();
             }
